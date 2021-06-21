@@ -11,6 +11,9 @@ function App() {
             <Route path="/market" exact>
               <MarketPlace />
             </Route>
+              <Route path="/sprites/:id" exact>
+                  {/*<SpriteDetails />*/}
+              </Route>
           </Switch>
       </BrowserRouter>
   );

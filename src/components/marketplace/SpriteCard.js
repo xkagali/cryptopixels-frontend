@@ -1,10 +1,10 @@
 import React from 'react';
-import {Row, Card, CardImg, Col} from "react-bootstrap";
+import {Card, CardImg, Col} from "react-bootstrap";
 import firstIcon from "../../lib/img/test/a0d020208000203.png";
 
 function SpriteCard() {
     return (
-        <Row>
+        // <NavLink to={`/sprites/${sprite.id}`}>
             <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
                 <Card>
                     <div className="cardCtn d-flex">
@@ -18,7 +18,7 @@ function SpriteCard() {
                     </Card.Body>
                 </Card>
             </Col>
-        </Row>
+        // </NavLink>
     );
 }
 
