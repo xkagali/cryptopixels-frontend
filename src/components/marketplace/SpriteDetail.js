@@ -21,6 +21,24 @@ function SpriteDetail() {
                                     </div>
                                 </div>
                             </div>
+                        <div className="spriteStats">
+                            <div className="spriteInfo d-flex">
+                                <div className="spriteStatus own">
+                                    You own this Pixel
+                                </div>
+                                <div className="boughtDate">
+                                    Bought Date:<br className="showDesktop" />23 Apr 2021
+                                </div>
+                            </div>
+                            <div className="spriteInfo d-flex">
+                                <div className="spriteStatus list">
+                                    You listed this Pixel
+                                </div>
+                                <div className="boughtDate">
+                                    Bought Date:<br className="showDesktop" />23 Apr 2021
+                                </div>
+                            </div>
+                        </div>
                     </Col>
                     <Col className="col-12 col-md-5 spriteDetails">
                         <h2>Wander</h2>
@@ -30,6 +48,7 @@ function SpriteDetail() {
                             <input type="text" name="search" placeholder="CP Price" /></div>
                         <Button variant="primary">Buy</Button>
                         <Button variant="secondary">Sold</Button>
+                        <Button variant="primary">List</Button>
                         <Button variant="tertiary">Unlist</Button>
                     </Col>
                 </Row>

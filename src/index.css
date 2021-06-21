@@ -162,6 +162,7 @@ input[type="text"]:focus {
 }
 
 button, .btn {
+  letter-spacing: -0.065em;
   padding: 5px 17px;
   outline: none;
   border: none;
@@ -335,6 +336,86 @@ button, .btn {
   color: #808080;
 }
 
+.spriteInfo {
+  align-items: center;
+}
+
+.spriteStats {
+  margin-top: 15px;
+}
+
+.spriteStatus {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+  font-family: 'Share Tech Mono', monospace;
+  text-decoration: none;
+  color: white;
+}
+
+.own {
+  background: #4BA747;
+}
+
+.spriteStatus.own:before, .spriteStatus.own:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+.spriteStatus.own:before {
+  top: -6px;
+  left: 0;
+  border-top: 6px #97DA3F solid;
+  border-bottom: 6px #3D734F solid;
+}
+.spriteStatus.own:after {
+  left: -6px;
+  top: 0;
+  border-left: 6px #4BA747 solid;
+  border-right: 6px #3D734F solid;
+}
+
+.list {
+  background: #5698CC;
+}
+
+.spriteStatus.list:before, .spriteStatus.list:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+.spriteStatus.list:before {
+  top: -6px;
+  left: 0;
+  border-top: 6px #72D6CE solid;
+  border-bottom: 6px #5956BD solid;
+}
+.spriteStatus.list:after {
+  left: -6px;
+  top: 0;
+  border-left: 6px #5698CC solid;
+  border-right: 6px #5956BD solid;
+}
+
+.boughtDate {
+  margin-left: 25px;
+  font-size: 16px;
+  line-height: 18px;
+  color: #C7C7C7;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.showDesktop {
+  display: block;
+}
+
+
 @media screen and (max-width: 600px) {
   .table {
     border: 0;
@@ -371,5 +452,15 @@ button, .btn {
 
   .table td:last-child {
     border-bottom: 0;
+  }
+  .spriteInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .boughtDate {
+    margin-left: 0;
+  }
+  .showDesktop {
+    display: none;
   }
 }
