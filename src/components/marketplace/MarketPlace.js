@@ -1,8 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import SpriteCard from "./SpriteCard";
+import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {getItems} from '../../store/actions/item.action'
+
 
 function MarketPlace() {
+
+
+    let dispatch = useDispatch()
+    let store = useSelector(state => state)
+
+    useEffect(() => {
+        dispatch(getItems())
+    }, [])
+
+    let itemList = store.items
+
     return (
         <>
             <Row className="mb-3">
@@ -24,7 +39,9 @@ function MarketPlace() {
                 </Col>
             </Row>
             <Row>
-                <SpriteCard />
+                {itemList.map(item=>(
+                    <SpriteCard item={item}/>
+                ))}
             </Row>
         </>
     );

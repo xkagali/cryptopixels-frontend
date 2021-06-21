@@ -1,20 +1,25 @@
 import React from 'react';
-import {Card, CardImg, Col} from "react-bootstrap";
-import firstIcon from "../../lib/img/test/a0d020208000203.png";
+import {Card, CardImg, Col, NavLink} from "react-bootstrap";
+import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
-function SpriteCard() {
+
+
+function SpriteCard({item}){
+
+    let img = convertPngToBtoa(item.itemName)
+
     return (
-        // <NavLink to={`/sprites/${sprite.id}`}>
+        // <NavLink to={`/sprites/${item._id}`}>
             <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
                 <Card>
                     <div className="cardCtn d-flex">
                         <div className="spriteCtn">
-                            <CardImg src={firstIcon} />
+                            <CardImg src={img} />
                         </div>
                     </div>
                     <Card.Body className="d-flex justify-content-center align-items-center">
-                        <div className="spriteID">#102912</div>
-                        <div className="cpPrice">3CP</div>
+                        <div className="spriteID">{item.itemName}</div>
+                        <div className="cpPrice">{item.priceListed}CP</div>
                     </Card.Body>
                 </Card>
             </Col>
