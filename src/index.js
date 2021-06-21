@@ -6,21 +6,18 @@ import "bootstrap/dist/css/bootstrap.css"
 import './index.css';
 import thunk from 'redux-thunk'
 
-import {Provider} from "react-redux";
-import {combineReducers, createStore, applyMiddleware} from "redux";
-import {itemReducer} from "./store/reducer/item.reducer";
-
-// let rootReducer = combineReducers({itemReducer,})
-const store=createStore(itemReducer,applyMiddleware(thunk))
-
-
+// import {Provider} from "react-redux";
+// import {combineReducers, createStore, applyMiddleware} from "redux";
+// import {itemReducer} from "./store/reducer/item.reducer";
+// import {transactionHistoryReducer} from "./store/reducer/transactionHistory.reducer";
+//
+// let rootReducer = combineReducers({itemReducer,transactionHistoryReducer})
+// const store=createStore(rootReducer,applyMiddleware(thunk))
 
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
-          <App />
-      </Provider>
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 

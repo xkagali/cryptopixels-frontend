@@ -1,22 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import SpriteCard from "./SpriteCard";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {getItems} from '../../store/actions/item.action'
 
 
 function MarketPlace() {
-
-
-    let dispatch = useDispatch()
-    let store = useSelector(state => state)
-
-    useEffect(() => {
-        dispatch(getItems())
-    }, [])
-
-    let itemList = store.items
+    const [itemList,setItemList]=useState([])
+    useEffect(()=>{
+        async function getItemList(){
+            let {data} = await axios.get("/marketplace/")
+            setItemList(data.items)
+        }
+        getItemList()
+    },[])
 
     return (
         <>
@@ -40,7 +36,7 @@ function MarketPlace() {
             </Row>
             <Row>
                 {itemList.map(item=>(
-                    <SpriteCard item={item}/>
+                    <SpriteCard item={item} key={item._id}/>
                 ))}
             </Row>
         </>

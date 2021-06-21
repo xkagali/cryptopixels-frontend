@@ -11,4 +11,5 @@ export function convertPngToBtoa(itemName) {
         { itemName: 'KJU', path: require( "../lib/img/test/a081c050b020003.png" ) },
     ];
     return images.filter((el)=>el.itemName===itemName)[0].path.default
+
 }

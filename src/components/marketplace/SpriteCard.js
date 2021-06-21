@@ -3,14 +3,11 @@ import {Card, CardImg, Col, NavLink} from "react-bootstrap";
 import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
 
-
 function SpriteCard({item}){
-
     let img = convertPngToBtoa(item.itemName)
-
     return (
-        // <NavLink to={`/sprites/${item._id}`}>
-            <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
+        <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
+            <NavLink to={`/sprites/${item._id}`}>
                 <Card>
                     <div className="cardCtn d-flex">
                         <div className="spriteCtn">
@@ -22,8 +19,9 @@ function SpriteCard({item}){
                         <div className="cpPrice">{item.priceListed}CP</div>
                     </Card.Body>
                 </Card>
-            </Col>
-        // </NavLink>
+            </NavLink>
+        </Col>
+
     );
 }
 
