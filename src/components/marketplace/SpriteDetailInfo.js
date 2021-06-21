@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, CardImg, Col, Row} from "react-bootstrap";
 import spriteIcon from "../../lib/img/test/a08120004050003.png";
 import OwnerCard from "../owner/OwnerCard";
+import SpriteStatus from "../owner/SpriteStatus";
 
 function SpriteDetailInfo() {
     return (
@@ -57,22 +58,7 @@ function SpriteDetailInfo() {
                     <OwnerCard />
                 </div>
                 <div className="spriteStats">
-                    <div className="spriteInfo d-flex">
-                        <div className="spriteStatus own">
-                            You own this Pixel
-                        </div>
-                        <div className="boughtDate">
-                            Bought Date:<br className="showDesktop" />23 Apr 2021
-                        </div>
-                    </div>
-                    <div className="spriteInfo d-flex">
-                        <div className="spriteStatus list">
-                            You listed this Pixel
-                        </div>
-                        <div className="boughtDate">
-                            Bought Date:<br className="showDesktop" />23 Apr 2021
-                        </div>
-                    </div>
+                    <SpriteStatus />
                 </div>
             </Col>
             <Col className="col-12 col-xs-10 col-md-4 col-xl-5 spriteDetails">
