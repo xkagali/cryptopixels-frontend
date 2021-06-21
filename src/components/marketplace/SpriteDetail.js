@@ -9,7 +9,39 @@ function SpriteDetail() {
             <Col className="col-10 col-md-8 col-xl-7">
                 <Row>
                     <Col className="col-12 col-md-7">
-                        <img src={spriteBox} className="spriteBox" />
+                        {/*<img src={spriteBox} className="spriteBoxPreview" />*/}
+                        <div className="spriteBox">
+                            <span className="spriteBox-top-left">&nbsp;</span>
+                            <span className="spriteBox-top-mid">&nbsp;</span>
+                            <span className="spriteBox-top-mid">&nbsp;</span>
+                            <span className="spriteBox-top-mid">&nbsp;</span>
+                            <span className="spriteBox-top-mid">&nbsp;</span>
+                            <span className="spriteBox-top-right">&nbsp;</span>
+                            <span className="spriteBox-mid-left">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-right">&nbsp;</span>
+                            <span className="spriteBox-mid-left">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-right">&nbsp;</span>
+                            <span className="spriteBox-mid-left">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-mid">&nbsp;</span>
+                            <span className="spriteBox-mid-right">&nbsp;</span>
+                            <span className="spriteBox-btm-left">&nbsp;</span>
+                            <span className="spriteBox-btm-mid">&nbsp;</span>
+                            <span className="spriteBox-btm-mid">&nbsp;</span>
+                            <span className="spriteBox-btm-mid">&nbsp;</span>
+                            <span className="spriteBox-btm-mid">&nbsp;</span>
+                            <span className="spriteBox-btm-right">&nbsp;</span>
+                        </div>
                             <div className="spriteOwner">
                                 Current Owner:
                                 <div className="ownerCard d-flex">
