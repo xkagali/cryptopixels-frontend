@@ -128,7 +128,7 @@ input[type="text"]:focus {
   to {left: -300%}
 }
 
-.cardCtn img, .ownerCard img {
+.cardCtn img, .ownerCard img, .spriteDetailsCtn img {
   width: 700%;
   position: absolute;
   top: -150px;
@@ -275,13 +275,21 @@ button, .btn {
   margin-right: 0;
 }
 
-.spriteBoxPreview {
-  margin-top: -35px;
-  max-width: 326px;
-  width: 100%;
+.spriteDetailsImage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.spriteDetailsCtn {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-45%, -50%);
 }
 
 .spriteBox {
+  margin-top: -35px;
   display: grid;
   gap: 0;
   grid-template-columns: repeat(6, 55px);
@@ -307,6 +315,18 @@ button, .btn {
   background-image: url("lib/img/sprite-box/top-right-ceiling.png");
 }
 
+.spriteBox-top-wall-left {
+  background-image: url("lib/img/sprite-box/top-left-wall.png");
+}
+
+.spriteBox-top-wall-mid {
+  background-image: url("lib/img/sprite-box/wall_mid.png");
+}
+
+.spriteBox-top-wall-right {
+  background-image: url("lib/img/sprite-box/top-right-wall.png");
+}
+
 .spriteBox-mid-left {
   background-image: url("lib/img/sprite-box/mid-left.png");
 }
@@ -329,6 +349,18 @@ button, .btn {
 
 .spriteBox-btm-right {
   background-image: url("lib/img/sprite-box/bottom-right.png");
+}
+
+.spriteBox-btm-wall-left {
+  background-image: url("lib/img/sprite-box/wall_left.png");
+}
+
+.spriteBox-btm-wall-mid {
+  background-image: url("lib/img/sprite-box/wall_mid.png");
+}
+
+.spriteBox-btm-wall-right {
+  background-image: url("lib/img/sprite-box/wall_right.png");
 }
 
 .spriteOwner {
@@ -466,7 +498,7 @@ button, .btn {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .table {
     border: 0;
     font-size: 16px;
@@ -507,6 +539,17 @@ button, .btn {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .spriteBox {
+    flex-grow: 1;
+    max-width: 330px;
+    min-width: 330px;
+    max-height: 330px;
+    min-height: 330px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
   .boughtDate {
     margin-left: 0;
   }

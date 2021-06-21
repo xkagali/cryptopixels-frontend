@@ -1,46 +1,58 @@
 import React from 'react';
 import {Row, Col, Button, CardImg, Table} from "react-bootstrap";
-import spriteBox from "../../lib/img/test/spriteBox.png"
 import avatar from "../../lib/img/test/a07020509060000.png"
+import spriteIcon from "../../lib/img/test/a08120004050003.png"
 
 function SpriteDetail() {
     return (
         <Row className="justify-content-center">
-            <Col className="col-10 col-md-8 col-xl-7">
+            <Col className="col-10 col-md-10 col-xl-7">
                 <Row>
-                    <Col className="col-12 col-md-7">
-                        {/*<img src={spriteBox} className="spriteBoxPreview" />*/}
-                        <div className="spriteBox">
-                            <span className="spriteBox-top-left">&nbsp;</span>
-                            <span className="spriteBox-top-mid">&nbsp;</span>
-                            <span className="spriteBox-top-mid">&nbsp;</span>
-                            <span className="spriteBox-top-mid">&nbsp;</span>
-                            <span className="spriteBox-top-mid">&nbsp;</span>
-                            <span className="spriteBox-top-right">&nbsp;</span>
-                            <span className="spriteBox-mid-left">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-right">&nbsp;</span>
-                            <span className="spriteBox-mid-left">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-right">&nbsp;</span>
-                            <span className="spriteBox-mid-left">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-mid">&nbsp;</span>
-                            <span className="spriteBox-mid-right">&nbsp;</span>
-                            <span className="spriteBox-btm-left">&nbsp;</span>
-                            <span className="spriteBox-btm-mid">&nbsp;</span>
-                            <span className="spriteBox-btm-mid">&nbsp;</span>
-                            <span className="spriteBox-btm-mid">&nbsp;</span>
-                            <span className="spriteBox-btm-mid">&nbsp;</span>
-                            <span className="spriteBox-btm-right">&nbsp;</span>
+                    <Col className="col-12 col-xs-10 col-md-8 col-xl-7">
+                        <div className="spriteDetailsImage">
+                            <div className="spriteBox">
+                                <span className="spriteBox-top-left">&nbsp;</span>
+                                <span className="spriteBox-top-mid">&nbsp;</span>
+                                <span className="spriteBox-top-mid">&nbsp;</span>
+                                <span className="spriteBox-top-mid">&nbsp;</span>
+                                <span className="spriteBox-top-mid">&nbsp;</span>
+                                <span className="spriteBox-top-right">&nbsp;</span>
+                                <span className="spriteBox-top-wall-left">&nbsp;</span>
+                                <span className="spriteBox-top-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-top-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-top-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-top-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-top-wall-right">&nbsp;</span>
+                                <span className="spriteBox-mid-left">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-right">&nbsp;</span>
+                                <span className="spriteBox-mid-left">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-mid">&nbsp;</span>
+                                <span className="spriteBox-mid-right">&nbsp;</span>
+                                <span className="spriteBox-btm-left">&nbsp;</span>
+                                <span className="spriteBox-btm-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-right">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-left">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-mid">&nbsp;</span>
+                                <span className="spriteBox-btm-wall-right">&nbsp;</span>
+                            </div>
+                            <div className="spriteDetailsCtn d-flex">
+                                <div className="spriteCtn">
+                                    <CardImg src={spriteIcon} />
+                                </div>
+                            </div>
                         </div>
                             <div className="spriteOwner">
                                 Current Owner:
@@ -72,7 +84,7 @@ function SpriteDetail() {
                             </div>
                         </div>
                     </Col>
-                    <Col className="col-12 col-md-5 spriteDetails">
+                    <Col className="col-12 col-xs-10 col-md-4 col-xl-5 spriteDetails">
                         <h2>Wander</h2>
                         <div className="spriteID">#102912</div>
                         <div className="dateListed">18 Jun 2021</div>
@@ -85,8 +97,8 @@ function SpriteDetail() {
                     </Col>
                 </Row>
             </Col>
-            <Col className="col-10 col-md-10 col-xl-9 divider">&nbsp;</Col>
-            <Col className="col-10 col-md-8 col-xl-7">
+            <Col className="col-10 col-md-11 col-xl-9 divider">&nbsp;</Col>
+            <Col className="col-10 col-md-10 col-xl-7">
                 <Row className="justify-content-center">
                     <Col className="col-12 mb-5">
                         <h3>Sales History</h3>
