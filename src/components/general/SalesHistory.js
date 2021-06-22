@@ -1,14 +1,16 @@
-import React from 'react';
+
+import React, {useEffect} from 'react';
 import {Col, Row, Table} from "react-bootstrap";
 
-function SalesHistory() {
+function SalesHistory({itemHistory}) {
+    console.log(itemHistory)
     return (
         <Row className="justify-content-center">
             <Col className="col-12 mb-5">
                 <h3>Sales History</h3>
                 <Table hover>
                     <thead>
-                    <tr>
+                    <tr style={{color:'white'}}>
                         <th>Last Sold Date</th>
                         <th>Last Sold Price</th>
                         <th>Buyer</th>
@@ -16,18 +18,14 @@ function SalesHistory() {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td data-label="Last Sold Date">23 Apr 2021</td>
-                        <td data-label="Last Sold Price">24CP</td>
-                        <td data-label="Buyer">Kai Lin</td>
-                        <td data-label="Seller">Guo Hao</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Last Sold Date">10 Jan 2021</td>
-                        <td data-label="Last Sold Price">10CP</td>
-                        <td data-label="Buyer">Ronald</td>
-                        <td data-label="Seller">Kai Lin</td>
-                    </tr>
+                    {itemHistory.map(item=>(
+                        <tr style={{color:'white'}}>
+                            <td data-label="Last Sold Date">{item.dateOfTransaction}</td>
+                            <td data-label="Last Sold Price">{item.transactedPrice}CP</td>
+                            <td data-label="Buyer">{item.buyer.displayName}</td>
+                            <td data-label="Seller">{item.seller.displayName}</td>
+                        </tr>
+                    ))}
                     </tbody>
                 </Table>
             </Col>

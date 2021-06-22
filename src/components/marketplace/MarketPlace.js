@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import SpriteCard from "./SpriteCard";
+import axios from "axios";
+
 
 function MarketPlace() {
+    const [itemList,setItemList]=useState([])
+    useEffect(()=>{
+        async function getItemList(){
+            let {data} = await axios.get("/marketplace/")
+            setItemList(data.items)
+        }
+        getItemList()
+    },[])
+
     return (
         <>
             <Row className="mb-3">
@@ -24,7 +35,9 @@ function MarketPlace() {
                 </Col>
             </Row>
             <Row>
-                <SpriteCard />
+                {itemList.map(item=>(
+                    <SpriteCard item={item} key={item._id}/>
+                ))}
             </Row>
         </>
     );
