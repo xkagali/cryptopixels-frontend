@@ -3,7 +3,6 @@ import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
 import avatar from "../../lib/img/test/a07020509060000.png";
 import spriteIcon from "../../lib/img/test/a08120004050003.png";
 import {NavLink} from "react-router-dom";
-import SpriteCard from "../marketplace/SpriteCard";
 
 function OwnerProfile() {
     return (
@@ -21,7 +20,8 @@ function OwnerProfile() {
                 </Col>
             </Row>
             <Row>
-                <Col className="col-12">
+                <Col className="col-12 d-flex flex-column">
+                    <div className="userSettingsTab d-flex">Settings</div>
                     <Tabs defaultActiveKey="currentPixels" id="tab" className="mb-3">
                         <Tab eventKey="currentPixels" title="Current Pixels" tabClassName="currentPixelsTab">
                             <div className="userSprites">
@@ -338,10 +338,7 @@ function OwnerProfile() {
                                 </tbody>
                             </Table>
                         </Tab>
-                        <Tab eventKey="achievements" title="Achievements" tabClassName="achievementsTab">
-
-                        </Tab>
-                        <Tab title="Settings" tabClassName="userSettingsTab">
+                        <Tab eventKey="achievements" title="Achievements" tabClassName="achievementsTab" disabled>
 
                         </Tab>
                     </Tabs>
