@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import {Col, Row, Table} from "react-bootstrap";
 
 function SalesHistory({itemHistory}) {
-    console.log(itemHistory)
     return (
         <Row className="justify-content-center">
             <Col className="col-12 mb-5">
@@ -19,7 +18,7 @@ function SalesHistory({itemHistory}) {
                     </thead>
                     <tbody>
                     {itemHistory.map(item=>(
-                        <tr style={{color:'white'}}>
+                        <tr style={{color:'white'}} key={itemHistory._id}>
                             <td data-label="Last Sold Date">{item.dateOfTransaction}</td>
                             <td data-label="Last Sold Price">{item.transactedPrice}CP</td>
                             <td data-label="Buyer">{item.buyer.displayName}</td>

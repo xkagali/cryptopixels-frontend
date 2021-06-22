@@ -1,19 +1,25 @@
 import React, {useEffect} from 'react';
 import {CardImg} from "react-bootstrap";
-import avatar from "../../lib/img/test/a07020509060000.png";
 import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
 function OwnerCard({item}) {
-
+    console.log(item)
+    let img
+    let owner
+    if (item.currentOwner){
+        img = convertPngToBtoa(item.currentOwner.displayImage)
+        owner = item.currentOwner.displayName
+    }
+    
     return (
         <>
             {item.currentOwner?
                 <div className="ownerCard d-flex">
                     <div className="spriteCtn">
-                        <CardImg src={avatar} />
+                        <CardImg src={img} />
                     </div>
                     <div className="ownerName">
-                        {item.currentOwner.displayName}
+                        {owner}
                     </div>
                 </div>
             :
