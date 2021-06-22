@@ -1,10 +1,123 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
 import avatar from "../../lib/img/test/a07020509060000.png";
 import spriteIcon from "../../lib/img/test/a08120004050003.png";
 import {NavLink} from "react-router-dom";
 
 function OwnerProfile() {
+
+    function createBox(){
+        /*
+        *
+
+        set base box to start with 21 grid column and give each cell an id
+        detect how many cols is there on each row and how many rows there are
+        if the cols/rows changes, give a new id for all cells
+        base on the ID of the cell, set the class to the specific wall
+
+        *
+        */
+        let counter = 1;
+        let spritesNumber = 12; //1-99999
+        let rows = 4;
+        let gridCtn = document.querySelector(".spriteBox")
+        //find how many cols in each row
+        let cellsPerRow = Math.floor(gridCtn.offsetWidth/55)
+        let _counter = counter; //this variable is a counter found in the while loop
+        //for every 1, 11, 21, 31 etc. add 2 rows
+        while (counter <= spritesNumber){
+             if (counter == _counter){
+                 rows += 2;
+                 _counter += 10;
+             }
+            counter += 1;
+        }
+        //create cell and set data-col data-row according to the number of cols
+        //so if 2nd row, reset id to 1
+        for (let j = 1; j <= rows; j++){
+            for (let i = 1; i <= cellsPerRow; i++){
+                let cell = document.createElement("span")
+                cell.setAttribute("data-col", i)
+                cell.setAttribute("data-row", j)
+                gridCtn.append(cell)
+
+                if(cell.dataset.col === "1" && cell.dataset.row === "1"){
+                    cell.className = "spriteBox-top-left"
+                }else if(cell.dataset.col == cellsPerRow && cell.dataset.row === "1"){
+                    cell.className = "spriteBox-top-right"
+                }else if(cell.dataset.row === "1") {
+                    cell.className = "spriteBox-top-mid"
+                }else if (cell.dataset.col === "1" && cell.dataset.row == rows){
+                    cell.className = "spriteBox-btm-wall-left"
+                }else if (cell.dataset.col == cellsPerRow && cell.dataset.row == rows){
+                    cell.className = "spriteBox-btm-wall-right"
+                }else if (cell.dataset.row == rows){
+                    cell.className = "spriteBox-btm-wall-mid"
+                }else if (cell.dataset.col === "1" && cell.dataset.row == rows-1){
+                    cell.className = "spriteBox-btm-left"
+                }else if (cell.dataset.col == cellsPerRow && cell.dataset.row == rows-1){
+                    cell.className = "spriteBox-btm-right"
+                }else if (cell.dataset.row == rows-1){
+                    cell.className = "spriteBox-btm-mid"
+                }else if(cell.dataset.col === "1"){
+                    cell.className = "spriteBox-mid-left"
+                }else if(cell.dataset.col == cellsPerRow){
+                    cell.className = "spriteBox-mid-right"
+                }else{
+                    cell.className = "spriteBox-mid-mid"
+                }
+            }
+        }
+
+        window.addEventListener('resize',function(e){
+            let gridCtnWidth = document.querySelector(".spriteBox").offsetWidth
+            cellsPerRow = Math.floor(gridCtnWidth/55)
+            let totalRows = getComputedStyle(gridCtn).getPropertyValue("grid-template-rows").split(" ").length
+            console.log(totalRows)
+
+            gridCtn.innerHTML="";
+
+            for (let j = 1; j <= totalRows; j++){
+                for (let i = 1; i <= cellsPerRow; i++){
+                    let cell = document.createElement("span")
+                    cell.setAttribute("data-col", i)
+                    cell.setAttribute("data-row", j)
+                    gridCtn.append(cell)
+
+                    if(cell.dataset.col === "1" && cell.dataset.row === "1"){
+                        cell.className = "spriteBox-top-left"
+                    }else if(cell.dataset.col == cellsPerRow && cell.dataset.row === "1"){
+                        cell.className = "spriteBox-top-right"
+                    }else if(cell.dataset.row === "1") {
+                        cell.className = "spriteBox-top-mid"
+                    }else if (cell.dataset.col === "1" && cell.dataset.row == totalRows){
+                        cell.className = "spriteBox-btm-wall-left"
+                    }else if (cell.dataset.col == cellsPerRow && cell.dataset.row == totalRows){
+                        cell.className = "spriteBox-btm-wall-right"
+                    }else if (cell.dataset.row == totalRows){
+                        cell.className = "spriteBox-btm-wall-mid"
+                    }else if (cell.dataset.col === "1" && cell.dataset.row == totalRows-1){
+                        cell.className = "spriteBox-btm-left"
+                    }else if (cell.dataset.col == cellsPerRow && cell.dataset.row == totalRows-1){
+                        cell.className = "spriteBox-btm-right"
+                    }else if (cell.dataset.row == totalRows-1){
+                        cell.className = "spriteBox-btm-mid"
+                    }else if(cell.dataset.col === "1"){
+                        cell.className = "spriteBox-mid-left"
+                    }else if(cell.dataset.col == cellsPerRow){
+                        cell.className = "spriteBox-mid-right"
+                    }else{
+                        cell.className = "spriteBox-mid-mid"
+                    }
+                }
+            }
+        })
+    }
+
+    useEffect(()=>{
+        createBox()
+    },[])
+
     return (
         <>
             <Row>
@@ -27,212 +140,7 @@ function OwnerProfile() {
                             <div className="userSprites">
                                 <div className="spriteDetailsImage">
                                     <div className="spriteBox">
-                                        <span className="spriteBox-top-left">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-right">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-left">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-top-wall-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-mid-left">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-mid">&nbsp;</span>
-                                        <span className="spriteBox-mid-right">&nbsp;</span>
-                                        <span className="spriteBox-btm-left">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-right">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-left">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-mid">&nbsp;</span>
-                                        <span className="spriteBox-btm-wall-right">&nbsp;</span>
+
                                     </div>
                                     <div className="spriteGrid">
                                         <div className="spriteDetailsCtn d-flex">
@@ -328,13 +236,13 @@ function OwnerProfile() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style={{color:'white'}}>
-                                        <td data-label="Name">Tracer</td>
-                                        <td data-label="Pixel ID">#102938</td>
-                                        <td data-label="Sold Date">01 Dec 2020</td>
-                                        <td data-label="Sold Price">10CP</td>
-                                        <td data-label="Buyer">Kai Lin</td>
-                                    </tr>
+                                <tr style={{color:'white'}}>
+                                    <td data-label="Name">Tracer</td>
+                                    <td data-label="Pixel ID">#102938</td>
+                                    <td data-label="Sold Date">01 Dec 2020</td>
+                                    <td data-label="Sold Price">10CP</td>
+                                    <td data-label="Buyer">Kai Lin</td>
+                                </tr>
                                 </tbody>
                             </Table>
                         </Tab>
