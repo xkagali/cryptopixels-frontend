@@ -4,6 +4,7 @@ import {Container} from "react-bootstrap"
 import Navigation from "./components/general/Navigation";
 import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
+import OwnerProfile from "./components/owner/OwnerProfile";
 
 function App() {
     return (
@@ -16,6 +17,9 @@ function App() {
                     </Route>
                     <Route path="/pixel/:id" exact>
                         <SpriteDetail/>
+                    </Route>
+                    <Route path="/profile/:id" exact>
+                        <OwnerProfile />
                     </Route>
                 </Switch>
             </Container>

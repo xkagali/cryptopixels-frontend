@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.css"
 import './index.css';
-import thunk from 'redux-thunk'
+// import thunk from 'redux-thunk'
 
 // import {Provider} from "react-redux";
 // import {combineReducers, createStore, applyMiddleware} from "redux";
