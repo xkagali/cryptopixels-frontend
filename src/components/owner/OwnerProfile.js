@@ -22,7 +22,7 @@ function OwnerProfile() {
             </Row>
             <Row>
                 <Col className="col-12">
-                    <Tabs defaultActiveKey="currentPixels" id="uncontrolled-tab-example" className="mb-3">
+                    <Tabs defaultActiveKey="currentPixels" id="tab" className="mb-3">
                         <Tab eventKey="currentPixels" title="Current Pixels" tabClassName="currentPixelsTab">
                             <div className="userSprites">
                                 <div className="spriteDetailsImage">
