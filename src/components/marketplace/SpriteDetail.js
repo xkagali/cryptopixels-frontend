@@ -32,4 +32,5 @@ function SpriteDetail() {
     );
 }
 
+
 export default SpriteDetail;

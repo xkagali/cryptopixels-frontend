@@ -17,4 +17,5 @@ function SpriteStatus({item}) {
     );
 }
 
+
 export default SpriteStatus;

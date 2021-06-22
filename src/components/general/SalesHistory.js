@@ -1,9 +1,9 @@
+
 import React, {useEffect} from 'react';
 import {Col, Row, Table} from "react-bootstrap";
 
 function SalesHistory({itemHistory}) {
     console.log(itemHistory)
-
     return (
         <Row className="justify-content-center">
             <Col className="col-12 mb-5">
