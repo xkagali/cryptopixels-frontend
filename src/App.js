@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import {Container} from "react-bootstrap"
 import Navigation from "./components/general/Navigation";
 import MarketPlace from "./components/marketplace/MarketPlace";
@@ -53,18 +53,35 @@ function App() {
         </BrowserRouter>
     );
 
-    function PrivateRouter({auth, user, Component, path, ...rest}){
-        return(
+    // function PrivateRouter({auth, user, Component, path, ...rest}){
+    //     return(
+    //         <>
+    //             { (auth) ?
+    //                 <Route path={path} >
+    //                     <Component {...rest} />
+    //                 </Route> : <Redirect to= {{
+    //                     // pathname = "/auth", //exclude userprofile page from not logged in
+    //                     // state: {from: location}
+    //                 }}/>
+    //             }
+    //         </>
+    //     )};
+
+    function PrivateRouter({auth, Component, path, location, ...rest}) {
+        //if auth is true then show Route else redirect to login
+        return (
             <>
-                { (auth) ?
-                    <Route path="/market" >
-                        <MarketPlace/>
-                    </Route> : <Route path="/auth" >
-                        <AuthForm auth={auth} setAuth={setAuth} />
-                    </Route>
+                {(auth) ?
+                    <Route path={path} {...rest}>
+                        <Component/>
+                    </Route> : <Redirect to={{
+                        pathname: "/auth/login",
+                        state: {from: location}
+                    }}/>
                 }
             </>
-        )};
+        )
+    }
 
 }
 export default App;

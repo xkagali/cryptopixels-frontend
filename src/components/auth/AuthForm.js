@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Container, Card, Form, Row, Col, FormControl, Button} from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from 'react-router-dom'
+import { GoogleLogin } from 'react-google-login';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''} //for sign up field
 
@@ -32,6 +33,7 @@ function Register({auth, setAuth, user}) {
                 history.push('/')
             } catch (error) {
                 console.log(error)
+                alert(error)
             }
         }
 
@@ -39,14 +41,12 @@ function Register({auth, setAuth, user}) {
         e.preventDefault(); //prevent refresh on form submit
         try {
             let res = await axios.post("/auth/login", formData)
-            console.log(res)
+            console.log(res.data.token)
             localStorage.setItem("token", res.data.token)
             setAuth(true)
+            history.push('/')
         }catch(error){
             console.log(error)
-        }
-        if(auth) {
-            history.push('/')
         }
     }
 
@@ -54,6 +54,7 @@ function Register({auth, setAuth, user}) {
         setFormData({...formData, [e.target.name]: e.target.value})
         console.log(formData)
     }
+
 
     return (
         <Container>
@@ -64,7 +65,7 @@ function Register({auth, setAuth, user}) {
                         <Row>
                             {/*<FormControl className="col-6 mx-auto" type="text" placeholder="First Name" name="firstName" onChange={handleChange} ></FormControl>*/}
                             {/*<FormControl className="col-6 mx-auto" type="text" placeholder="Last Name" name="lastName" onChange={handleChange} ></FormControl>*/}
-                            <FormControl className="col-6 mx-auto" type="text" placeholder="Display Name" name="displayName" onChange={handleChange} ></FormControl>
+                            <FormControl className="col-6 mx-auto" type="text" placeholder="Username" name="displayName" onChange={handleChange} ></FormControl>
                         </Row>
                     )}
                     {/*<FormControl type="email" placeholder="Display Name" name="displayName" onChange={handleChange} />*/}

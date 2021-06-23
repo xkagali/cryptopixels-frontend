@@ -35,7 +35,7 @@ console.log(user)
                         {/*</Nav>*/}
                         { user ? (
                             <Nav className = "text-white d-inline-flex">
-                                <div className= "mr-2 bg-warning">{user.displayName}</div>
+                                <div className= "mr-2 bg-secondary">{user.username}</div>
                                 <Button variant="outline-secondary" onClick={logout} >Logout</Button>
                             </Nav>
                         ) : (
