@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
+import {Card, CardImg, Col, Form, Row, Tab, Table, Tabs} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import OwnerCard from "./OwnerCard";
@@ -94,8 +94,6 @@ function OwnerProfile() {
 
             setUpdateSprites(spriteArr)
         }
-
-        console.log(spriteArr)
         window.addEventListener('resize',function(e){
             spriteGridCtnWidth = document.querySelector(".spriteGrid").offsetWidth
             gridCellsPerRow = Math.floor(spriteGridCtnWidth/55)
@@ -155,28 +153,11 @@ function OwnerProfile() {
     function createBox(){
 
         //create box grid
-        let counter = 1;
         let spritesNumber = userSprites.length;
         let rows;
         let gridCtn = document.querySelector(".spriteBox")
         //find how many cols in each row
         let cellsPerRow = Math.floor(gridCtn.offsetWidth/55)
-        // let _counter = counter; //this variable is a counter found in the while loop
-        //for every 1, 11, 21, 31 etc. add 2 rows
-        // while (counter <= spritesNumber){
-        //      if (counter == _counter){
-        //          rows += 2;
-        //          _counter += 10;
-        //      }
-        //     counter += 1;
-        // }
-
-        // 21 cols
-        // counter = 0
-        //
-        // each sprite takes 2 cols, so if there's 7 sprites, it takes up 14, left with 7 cols
-        //
-        // 21/2 = 10.5 (round down to 10) - means 1 row can fit 10
         let totalFit = Math.floor(cellsPerRow/2)
 
         //if total sprites is 15 and total fit is 5, take total sprites divide by total fit to get number of rows
@@ -184,7 +165,6 @@ function OwnerProfile() {
         rows = 6+(totalRows*2)
 
         //create cell and set data-col data-row according to the number of cols
-        //so if 2nd row, reset id to 1
         for (let j = 1; j <= rows; j++){
             for (let i = 1; i <= cellsPerRow; i++){
                 let cell = document.createElement("span")
@@ -304,7 +284,18 @@ function OwnerProfile() {
 
                         </Tab>
                         <Tab eventKey="settings" title="Settings" tabClassName="userSettingsTab">
-
+                            <Form>
+                                {/*{userDetails.map(detail=>(*/}
+                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                    <Form.Label column sm="2">
+                                        Email
+                                    </Form.Label>
+                                    <Col sm="10">
+                                        <Form.Control />
+                                    </Col>
+                                </Form.Group>
+                                {/*))}*/}
+                            </Form>
                         </Tab>
                     </Tabs>
                 </Col>
