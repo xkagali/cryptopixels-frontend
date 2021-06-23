@@ -24,7 +24,7 @@ function Register({auth, setAuth, user}) {
     const registerSubmit = async(e) => {
         e.preventDefault(); //prevent refresh on form submit
             try {
-                let res = await axios.post("/auth/register", formData)
+                let res = await axios.post("/register", formData)
                 console.log(res)
                 console.log(res.data.token)
                 localStorage.setItem("token", res.data.token)
@@ -39,7 +39,7 @@ function Register({auth, setAuth, user}) {
     const loginSubmit = async(e) => {
         e.preventDefault(); //prevent refresh on form submit
         try {
-            let res = await axios.post("/auth/login", formData)
+            let res = await axios.post("/login", formData)
             console.log(res.data.token)
             localStorage.setItem("token", res.data.token)
             setAuth(true)

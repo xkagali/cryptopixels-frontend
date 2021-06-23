@@ -13,7 +13,7 @@ import AdminPage from "./components/general/Admin";
 function App() {
     const [auth, setAuth] = useState({})
     const [user, setUser] = useState({})
-    const [admin, setadmin] = useState({})
+    // const [admin, setadmin] = useState({})
 
     useEffect(() => {
         async function setUserStatus() {
@@ -37,7 +37,8 @@ function App() {
 
 
     // console.log(`user is admin is ${user.isAdmin}`)
-    // console.log(data)
+    console.log(auth)
+    console.log("token")
     //
     // useEffect(() => {
     //     async function setAdminStatus() {
@@ -65,7 +66,8 @@ function App() {
             <Container>
                 <Navigation setAuth={setAuth} setUser={setUser} user={user} />
                 <Switch>
-                    {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
+
+                    {/*<PrivateRouter user={user} setAuth={setAuth} setUser={setUser} path="/auth/admin" exact />*/}
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
                     </Route>
@@ -75,7 +77,7 @@ function App() {
                     <Route path="/pixel/:id" exact>
                         <SpriteDetail  setUser={setUser} user={user} />
                     </Route>
-                    <Route path="/admin" exact>
+                    <Route path="/auth/admin" exact>
                         <AdminPage/>
                     </Route>
                 </Switch>
@@ -97,21 +99,32 @@ function App() {
     //         </>
     //     )};
 
-    // function PrivateRoute({auth, Component, path, location, restricted, ...rest}) {
-    //     //if auth is true then show Route else redirect to login
-    //     return (
-    //         <>
-    //             {/*{(auth) ?*/}
-    //             {/*    <Route path={path} {...rest}>*/}
-    //             {/*        <Component />*/}
-    //             {/*    </Route> : <Redirect to={{*/}
-    //             {/*        pathname: "/auth", //exclude userprofile page from not logged in*/}
-    //             {/*        // state: {from: location}*/}
-    //             {/*    }}/>*/}
-    //             {/*}*/}
-    //         </>
-    //     )
-    // }
+// const PrivateRouter = ({auth, user, Component, path, ...rest}) => {
+//
+//     return(
+//         <>{!(auth) ?
+//             <Redirect to ="/auth"/>
+//             :
+//             console.log("yoyoyoyo")
+//         }</>
+//     )
+// };
 
+
+//
+// function PrivateRoute({auth, Component, path, location, restricted, ...rest}) {
+//     //if auth is true then show Route else redirect to login
+//     return (
+//         <>
+//             {(auth) ?
+//                 <Route path={path} {...rest}>
+//                     <Component />
+//                 </Route> : <Redirect to={{
+//                     pathname: "/auth", //exclude userprofile page from not logged in
+//                     state: {from: location}
+//                 }}/>
+//             }
+//         </>
+//     )
 }
 export default App;

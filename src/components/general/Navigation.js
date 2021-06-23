@@ -3,15 +3,12 @@ import {Container, Row, Nav, Navbar, Button} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
 import {useHistory, useLocation} from "react-router-dom";
 
-function Navigation({setAuth, auth, user, setUser}) {
+function Navigation({setAuth, user, setUser}) {
     // const [user, setUser] = useState("");
-    // const dispatch = useDispatch()
     const history = useHistory()
     const location = useLocation()
-    console.log(localStorage.getItem('token'))
-
     // console.log(user)
-    
+
     const logout = (e) => {
         e.preventDefault()
         localStorage.clear()
