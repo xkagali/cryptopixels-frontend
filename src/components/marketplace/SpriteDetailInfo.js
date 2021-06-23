@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Button, CardImg, Col, Row} from "react-bootstrap";
-// import img from "../../lib/img/test/a08120004050003.png";
 import OwnerCard from "../owner/OwnerCard";
 import SpriteStatus from "../owner/SpriteStatus";
-import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 
 function SpriteDetailInfo({item}) {
     const {id} = useParams()
-    let img
     let currentUserIdTest = '60d20221a33274172cf44235'
     let currentUserPoints = 10000
     console.log(currentUserIdTest)
@@ -17,10 +14,6 @@ function SpriteDetailInfo({item}) {
 
     const [newListedPrice, setNewListedPrice] = useState(0)
 
-
-    if (item.itemName){
-        img = convertPngToBtoa(item.itemName)
-    }
 
     function setListedPrice(e){
         setNewListedPrice(e.target.value)
@@ -116,7 +109,7 @@ function SpriteDetailInfo({item}) {
                         </div>
                         <div className="spriteDetailsCtn d-flex">
                             <div className="spriteCtn">
-                                <CardImg src={img} />
+                                <CardImg src={item.itemImage} />
                             </div>
                         </div>
                     </div>
