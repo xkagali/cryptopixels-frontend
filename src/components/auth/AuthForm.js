@@ -24,14 +24,14 @@ function Register({auth, setAuth, user}) {
     const registerSubmit = async(e) => {
         e.preventDefault(); //prevent refresh on form submit
             try {
-                let res = await axios.post("/register", formData)
+                let res = await axios.post("/auth/register", formData)
                 console.log(res)
                 console.log(res.data.token)
                 localStorage.setItem("token", res.data.token)
                 setAuth(true)
                 history.push('/')
             } catch (error) {
-                console.log(error)
+                console.log(`HEREEREREER ${error}`)
                 alert(error)
             }
         }
@@ -39,7 +39,7 @@ function Register({auth, setAuth, user}) {
     const loginSubmit = async(e) => {
         e.preventDefault(); //prevent refresh on form submit
         try {
-            let res = await axios.post("/login", formData)
+            let res = await axios.post("/auth/login", formData)
             console.log(res.data.token)
             localStorage.setItem("token", res.data.token)
             setAuth(true)
@@ -51,9 +51,7 @@ function Register({auth, setAuth, user}) {
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
-        console.log(formData)
     }
-
 
     return (
         <Container>
