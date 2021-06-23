@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {Container, Card, Form, Row, Col, FormControl, Button} from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from 'react-router-dom'
-import { GoogleLogin } from 'react-google-login';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''} //for sign up field
 
@@ -52,7 +51,6 @@ function Register({auth, setAuth, user}) {
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
-        console.log(formData)
     }
 
 

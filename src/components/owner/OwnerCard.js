@@ -7,7 +7,7 @@ function OwnerCard({item}) {
             {item.currentOwner?
                 <div className="ownerCard d-flex">
                     <div className="spriteCtn">
-                        <CardImg src={item.itemImage} />
+                        <CardImg src={item.currentOwner.displayImage?.itemImage} />
                     </div>
                     <div className="ownerName">
                         {item.currentOwner.displayName}
