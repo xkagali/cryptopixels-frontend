@@ -1,19 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, CardImg, Col, Row} from "react-bootstrap";
 import OwnerCard from "../owner/OwnerCard";
 import SpriteStatus from "../owner/SpriteStatus";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 
+
 function SpriteDetailInfo({item, user, setUser}) {
-
     const {id} = useParams()
-    let img
-    let currentUserIdTest = "60d20221a33274172cf44235"
-    let currentUserPoints = 10000
-    // console.log(user._id)
-    // console.log(item.currentOwner?._id)
-
     const [newListedPrice, setNewListedPrice] = useState(0)
 
 
@@ -32,6 +26,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                 await axios.put(`/item/changeListPrice/${id}`, {priceListed: newListedPrice})
                 alert('Item Successfully listed!')
             }
+            window.location.reload()
         }catch(e){
             console.log(e)
         }
@@ -42,6 +37,7 @@ function SpriteDetailInfo({item, user, setUser}) {
         try{
             await axios.put(`/item/unlist/${id}`)
             alert('Item Successfully Unlisted!')
+            window.location.reload()
         }catch(e){
             console.log(e)
         }
@@ -50,7 +46,7 @@ function SpriteDetailInfo({item, user, setUser}) {
     async function submitBuy(e){
         e.preventDefault()
         try{
-            if (item.priceListed > currentUserPoints){
+            if (item.priceListed > user.points){
                 alert('Not Enough Points!')
             } else {
                 await axios.put(`/item/buy/${id}`, {
@@ -61,6 +57,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                     dateOfTransaction: new Date(),
                 })
                 alert('Item Bought!')
+                window.location.reload()
             }
         }catch(e){
             console.log(e)
@@ -117,7 +114,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                     </div>
                     <div className="spriteOwner">
                         Current Owner:
-                        {/*<OwnerCard item={item}/>*/}
+                        <OwnerCard item={item}/>
                     </div>
                     <div className="spriteStats">
                         <SpriteStatus item={item} user={user}/>
@@ -127,28 +124,33 @@ function SpriteDetailInfo({item, user, setUser}) {
                     <h2>{item.itemName}</h2>
                     <div className="spriteID">{item._id}</div>
 
-
-
-                    {item.inMarketplace?
+                    {user?
                         <>
-                            <div className="dateListed">{item.dateListed}</div>
-                            <div className="spritePrice">{item.priceListed}CP
-                                <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
-                            </div>
-                        </>
-                        :
-                        <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
-                    }
+                            {item.inMarketplace?
+                                <>
+                                    <div className="dateListed">{item.dateListed}</div>
+                                    <div className="spritePrice">{item.priceListed}CP</div>
+                                </>
+                                :
+                                <></>
+                            }
 
-                    {!(user?._id===item.currentOwner?._id) ?
-                        <>{item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}</>
+                            {!(user?._id===item.currentOwner?._id) ?
+                                <>
+                                    <div className="spriteDetails">{user.points}CP Available</div>
+                                    {item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}
+                                </>
+                                :
+                                <>
+                                    <div><input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/></div>
+                                    {/*<Button variant="secondary" >Sold</Button>*/}
+                                    <Button variant="primary" onClick={submitListedPrice}>List</Button>
+                                    {item.inMarketplace? <Button variant="tertiary" onClick={submitUnlist}>Unlist</Button>:<></>}
+                                </>
+                            }
+                        </>
                     :
-                        <>
-                            {item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}
-                            <Button variant="secondary" >Sold</Button>
-                            <Button variant="primary" onClick={submitListedPrice}>List</Button>
-                            {item.inMarketplace? <Button variant="tertiary" onClick={submitUnlist}>Unlist</Button>:<></>}
-                        </>
+                        <div className="spritePrice">{item.priceListed}CP</div>
                     }
                 </Col>
             </Row>
