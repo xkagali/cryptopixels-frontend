@@ -1,18 +1,16 @@
 import React from 'react';
 import {Card, CardImg, Col} from "react-bootstrap";
 import {NavLink} from "react-router-dom"
-import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
 
 function SpriteCard({item}){
-    let img = convertPngToBtoa(item.itemName)
     return (
         <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
-            <NavLink to={`/pixel/${item._id}`}>
+g            <NavLink to={`/pixel/${item._id}`}>
                     <Card>
                         <div className="cardCtn d-flex">
                             <div className="spriteCtn">
-                                <CardImg src={img} />
+                                <CardImg src={item.itemImage} />
                             </div>
                         </div>
                         <Card.Body className="d-flex justify-content-center align-items-center">
