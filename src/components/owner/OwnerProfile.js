@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
-import spriteIcon from "../../lib/img/test/a08120004050003.png";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import OwnerCard from "./OwnerCard";
@@ -42,7 +41,6 @@ function OwnerProfile() {
         let gridCellsPerRow = Math.floor(spriteGridCtnWidth/55)
 
         let totalFit = Math.floor(gridCellsPerRow/2)
-        console.log("total fit " + totalFit)
 
         // 21 cols
         // counter = 0
@@ -159,19 +157,32 @@ function OwnerProfile() {
         //create box grid
         let counter = 1;
         let spritesNumber = userSprites.length;
-        let rows = 4;
+        let rows;
         let gridCtn = document.querySelector(".spriteBox")
         //find how many cols in each row
         let cellsPerRow = Math.floor(gridCtn.offsetWidth/55)
-        let _counter = counter; //this variable is a counter found in the while loop
+        // let _counter = counter; //this variable is a counter found in the while loop
         //for every 1, 11, 21, 31 etc. add 2 rows
-        while (counter <= spritesNumber){
-             if (counter == _counter){
-                 rows += 2;
-                 _counter += 10;
-             }
-            counter += 1;
-        }
+        // while (counter <= spritesNumber){
+        //      if (counter == _counter){
+        //          rows += 2;
+        //          _counter += 10;
+        //      }
+        //     counter += 1;
+        // }
+
+        // 21 cols
+        // counter = 0
+        //
+        // each sprite takes 2 cols, so if there's 7 sprites, it takes up 14, left with 7 cols
+        //
+        // 21/2 = 10.5 (round down to 10) - means 1 row can fit 10
+        let totalFit = Math.floor(cellsPerRow/2)
+
+        //if total sprites is 15 and total fit is 5, take total sprites divide by total fit to get number of rows
+        let totalRows = Math.floor(spritesNumber/totalFit)
+        rows = 6+(totalRows*2)
+
         //create cell and set data-col data-row according to the number of cols
         //so if 2nd row, reset id to 1
         for (let j = 1; j <= rows; j++){
@@ -268,19 +279,13 @@ function OwnerProfile() {
                                 <div className="spriteDetailsImage">
                                     <div className="spriteBox"></div>
                                     <div className="spriteGrid">
-
-                                        {updateSprites.map((sprite,index)=>(
+                                        {updateSprites.map((sprite)=>(
                                             <div className="spriteDetailsCtn d-flex" key={sprite._id} style={{gridColumnStart: sprite.col, gridRowStart: sprite.row}}>
                                                 <div className="spriteCtn">
                                                     <CardImg src={sprite.itemImage} />
                                                 </div>
                                             </div>
                                         ))}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '4'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>
