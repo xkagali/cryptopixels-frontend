@@ -6,23 +6,23 @@ function OwnerCard({item}) {
     // console.log(item)
     let img
     let owner
-    if (item.currentOwner) {
-        img = convertPngToBtoa(item.currentOwner.displayImage)
-        owner = item.currentOwner.displayName
-    }
-
-    if (item.displayImage || item.displayName) {
-        img = convertPngToBtoa(item.displayImage)
-        owner = item.displayName
-    }
+    // if (item.currentOwner) {
+    //     img = convertPngToBtoa(item.currentOwner.displayImage)
+    //     owner = item.currentOwner.displayName
+    // }
+    //
+    // if (item.displayImage || item.displayName) {
+    //     img = convertPngToBtoa(item.displayImage)
+    //     owner = item.displayName
+    // }
 
     return (
         <div className="ownerCard d-flex">
             <div className="spriteCtn">
-                <CardImg src={img}/>
+                {/*<CardImg src={img}/>*/}
             </div>
             <div className="ownerName">
-                {owner}
+                {/*{owner}*/}
             </div>
         </div>
     );

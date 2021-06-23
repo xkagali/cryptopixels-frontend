@@ -14,6 +14,32 @@ function OwnerProfile() {
     const [userTransactions, setUserTransactions] = useState([])
     const [userListed, setUserListed] = useState([])
 
+    const [newDetails,setNewDetails] = useState({})
+    const [previewIcon, setPreviewIcon] = useState("")
+
+    function change(e) {
+        setNewDetails(currState => ({...currState, ...{[e.target.name]: e.target.value}}))
+    }
+
+    async function onSubmit(e){
+        e.preventDefault()
+        try{
+            let result = await axios.post(`/profile/${id}`,newDetails)
+            console.log(result)
+        }catch(e){
+
+        }
+    }
+
+    console.log(newDetails)
+    console.log(userSprites)
+    useEffect(()=>{
+        let foundAvatar = userSprites.find(element => element._id === newDetails.displayImage)
+        if(foundAvatar){
+            setPreviewIcon(foundAvatar.itemImage)
+        }
+    },[newDetails])
+
     useEffect(()=>{
         async function getUserDetails(){
             let {data} = await axios.get(`/profile/${id}`)
@@ -24,7 +50,6 @@ function OwnerProfile() {
         }
         getUserDetails()
     },[])
-
     useEffect(()=>{
         if(userSprites.length){
             createBox()
@@ -62,7 +87,6 @@ function OwnerProfile() {
             })
             setUpdateSprites(spriteArr)
         }else if(userSprites.length > totalFit){
-            console.log("total sprites " + userSprites.length)
             // if total sprites exceed this amount
             // eg: total fit row is 5 and total sprites is 15
             let row = 3;
@@ -284,17 +308,25 @@ function OwnerProfile() {
 
                         </Tab>
                         <Tab eventKey="settings" title="Settings" tabClassName="userSettingsTab">
-                            <Form>
-                                {/*{userDetails.map(detail=>(*/}
-                                <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="2">
-                                        Email
-                                    </Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control />
-                                    </Col>
-                                </Form.Group>
-                                {/*))}*/}
+                            {previewIcon && <div><img src={previewIcon} /></div>}
+                            <Form onSubmit={onSubmit}>
+                                <label>Display Name
+                                <input type="text" onChange={change} name="displayName" defaultValue={userDetails.displayName} />
+                                </label>
+                                <label>Email
+                                    <input type="email" name="email" defaultValue={userDetails.email} readOnly />
+                                </label>
+                                <label>Password
+                                    <input type="password" onChange={change} name="password" defaultValue={userDetails.password} />
+                                </label>
+                                <label>Avatar
+                                    <select name="displayImage" onChange={change}>
+                                    {userSprites.map(sprite=>(
+                                        <option key={sprite._id} value={sprite._id}>{sprite.itemName}</option>
+                                    ))}
+                                    </select>
+                                </label>
+                                <button type="submit">Edit Profile</button>
                             </Form>
                         </Tab>
                     </Tabs>
