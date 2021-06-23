@@ -5,6 +5,7 @@ import Navigation from "./components/general/Navigation";
 import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
 import OwnerProfile from "./components/owner/OwnerProfile";
+import AdminPage from "./components/general/Admin";
 
 function App() {
     return (
@@ -20,6 +21,9 @@ function App() {
                     </Route>
                     <Route path="/profile/:id" exact>
                         <OwnerProfile />
+                    </Route>
+                    <Route path="/admin" exact>
+                        <AdminPage/>
                     </Route>
                 </Switch>
             </Container>
