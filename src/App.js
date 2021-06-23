@@ -13,8 +13,8 @@ import AdminPage from "./components/general/Admin";
 function App() {
     const [auth, setAuth] = useState({})
     const [user, setUser] = useState({})
+    const [admin, setadmin] = useState({})
 
-    console.log(user)
     useEffect(() => {
         async function setUserStatus() {
             try {
@@ -34,8 +34,31 @@ function App() {
         }
         setUserStatus()
     },[auth])
-    // console.log(user)
+
+
+    // console.log(`user is admin is ${user.isAdmin}`)
     // console.log(data)
+    //
+    // useEffect(() => {
+    //     async function setAdminStatus() {
+    //         try {
+    //             let {data} = await axios.get("/auth/user", {
+    //                 headers: {
+    //                     authorization: `Bearer ${localStorage.token}`
+    //                 }
+    //             })
+    //             setAdmin(true)
+    //             setUser(data.user)
+    //             console.log(data.user._id)
+    //         } catch (e) {
+    //             setAuth(false)
+    //             setUser(null)
+    //             localStorage.removeItem("token")
+    //         }
+    //     }
+    //     setAdminStatus()
+    // },[admin])
+
 
     return (
         <BrowserRouter>

@@ -10,8 +10,8 @@ function Navigation({setAuth, auth, user, setUser}) {
     const location = useLocation()
     console.log(localStorage.getItem('token'))
 
-    console.log(user)
-
+    // console.log(user)
+    
     const logout = (e) => {
         e.preventDefault()
         localStorage.clear()
@@ -20,7 +20,6 @@ function Navigation({setAuth, auth, user, setUser}) {
         setUser(null) //set user to null) once logout
     }
 
-console.log(user)
     return (
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
