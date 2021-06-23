@@ -1,24 +1,47 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
 import avatar from "../../lib/img/test/a07020509060000.png";
 import spriteIcon from "../../lib/img/test/a08120004050003.png";
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
+import axios from "axios";
+import OwnerCard from "./OwnerCard";
+import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
+import SalesHistory from "../general/SalesHistory";
+import SpriteCard from "../marketplace/SpriteCard";
 
 function OwnerProfile() {
+    let {id} = useParams()
+    const [userDetails,setUserDetails] = useState([])
+    const [userSprites,setUserSprites] = useState([])
+    const [userTransactions, setUserTransactions] = useState([])
+    const [userListed, setUserListed] = useState([])
+    let img
+
+    useEffect(()=>{
+        async function getUserDetails(){
+            let {data} = await axios.get(`/profile/${id}`)
+            setUserDetails(data.userDetails)
+            setUserSprites(data.userDetails.items)
+            setUserTransactions(data.salesHistory)
+            setUserListed(data.userListed)
+        }
+        getUserDetails()
+    },[])
+
+    useEffect(()=>{
+        if(userSprites.length){
+            createBox()
+        }
+
+        userSprites.forEach(sprite=>{
+            img = convertPngToBtoa(sprite.itemName)
+        })
+
+    },[userSprites])
 
     function createBox(){
-        /*
-        *
-
-        set base box to start with 21 grid column and give each cell an id
-        detect how many cols is there on each row and how many rows there are
-        if the cols/rows changes, give a new id for all cells
-        base on the ID of the cell, set the class to the specific wall
-
-        *
-        */
         let counter = 1;
-        let spritesNumber = 12; //1-99999
+        let spritesNumber = userSprites.length;
         let rows = 4;
         let gridCtn = document.querySelector(".spriteBox")
         //find how many cols in each row
@@ -73,7 +96,7 @@ function OwnerProfile() {
             let gridCtnWidth = document.querySelector(".spriteBox").offsetWidth
             cellsPerRow = Math.floor(gridCtnWidth/55)
             let totalRows = getComputedStyle(gridCtn).getPropertyValue("grid-template-rows").split(" ").length
-            console.log(totalRows)
+            // console.log(totalRows)
 
             gridCtn.innerHTML="";
 
@@ -114,139 +137,99 @@ function OwnerProfile() {
         })
     }
 
-    useEffect(()=>{
-        createBox()
-    },[])
-
     return (
         <>
             <Row>
                 <Col className="col-12">
-                    <div className="ownerCard d-flex">
-                        <div className="spriteCtn">
-                            <CardImg src={avatar} />
-                        </div>
-                        <div className="ownerName">
-                            Guo Hao
-                        </div>
-                    </div>
+                    <OwnerCard item={userDetails} />
                 </Col>
             </Row>
             <Row>
                 <Col className="col-12 d-flex flex-column">
-                    <div className="userSettingsTab d-flex">Settings</div>
                     <Tabs defaultActiveKey="currentPixels" id="tab" className="mb-3">
                         <Tab eventKey="currentPixels" title="Current Pixels" tabClassName="currentPixelsTab">
                             <div className="userSprites">
                                 <div className="spriteDetailsImage">
-                                    <div className="spriteBox">
-
-                                    </div>
+                                    <div className="spriteBox"></div>
                                     <div className="spriteGrid">
                                         <div className="spriteDetailsCtn d-flex">
                                             <div className="spriteCtn">
                                                 <CardImg src={spriteIcon} />
                                             </div>
                                         </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '4'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '6'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '8'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '10'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '12'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '14'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '16'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '18'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '20'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5', gridColumnStart: '4'}}>
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '4'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '6'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '8'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '10'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '12'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '14'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '16'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '18'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '20'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5', gridColumnStart: '4'}}>*/}
+                                        {/*    <div className="spriteCtn">*/}
+                                        {/*        <CardImg src={spriteIcon} />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>
                         </Tab>
                         <Tab eventKey="listedPixels" title="Listed Pixels" tabClassName="listedPixelsTab">
-                            <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
-                                <NavLink to={`/sprites/1`}>
-                                    <Card>
-                                        <div className="cardCtn d-flex">
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
-                                            </div>
-                                        </div>
-                                        <Card.Body className="d-flex justify-content-center align-items-center">
-                                            <div className="spriteID">#0192380</div>
-                                            <div className="cpPrice">10CP</div>
-                                        </Card.Body>
-                                    </Card>
-                                </NavLink>
-                            </Col>
+                            <Row>
+                                {userListed.map(sprite=>(
+                                    <SpriteCard item={sprite} />
+                                ))}
+                            </Row>
                         </Tab>
                         <Tab eventKey="soldPixels" title="Sold Pixels" tabClassName="soldPixelsTab">
-                            <Table hover>
-                                <thead>
-                                <tr style={{color:'white'}}>
-                                    <th>Name</th>
-                                    <th>Pixel ID</th>
-                                    <th>Sold Date</th>
-                                    <th>Sold Price</th>
-                                    <th>Buyer</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr style={{color:'white'}}>
-                                    <td data-label="Name">Tracer</td>
-                                    <td data-label="Pixel ID">#102938</td>
-                                    <td data-label="Sold Date">01 Dec 2020</td>
-                                    <td data-label="Sold Price">10CP</td>
-                                    <td data-label="Buyer">Kai Lin</td>
-                                </tr>
-                                </tbody>
-                            </Table>
+                            <SalesHistory userTransactions={userTransactions} userProfile={true} />
                         </Tab>
                         <Tab eventKey="achievements" title="Achievements" tabClassName="achievementsTab" disabled>
+
+                        </Tab>
+                        <Tab eventKey="settings" title="Settings" tabClassName="userSettingsTab">
 
                         </Tab>
                     </Tabs>

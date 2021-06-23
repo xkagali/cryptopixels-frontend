@@ -5,7 +5,10 @@ import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
 
 function SpriteCard({item}){
-    let img = convertPngToBtoa(item.itemName)
+    let img
+    if(item.itemName){
+        img = convertPngToBtoa(item.itemName)
+    }
     return (
         <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
             <NavLink to={`/pixel/${item._id}`}>
