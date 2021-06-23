@@ -22,7 +22,7 @@ function App() {
                 })
                 setAuth(true)
                 setUser(data.user)
-                console.log(data.user)
+                console.log(data.user._id)
             } catch (e) {
                 setAuth(false)
                 setUser(null)
@@ -39,6 +39,7 @@ function App() {
             <Container>
                 <Navigation setAuth={setAuth} setUser={setUser} user={user} />
                 <Switch>
+                    {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
                     </Route>
@@ -46,7 +47,7 @@ function App() {
                         <MarketPlace/>
                     </Route>
                     <Route path="/pixel/:id" exact>
-                        <SpriteDetail/>
+                        <SpriteDetail  setUser={setUser} user={user} />
                     </Route>
                 </Switch>
             </Container>
@@ -67,21 +68,21 @@ function App() {
     //         </>
     //     )};
 
-    function PrivateRouter({auth, Component, path, location, ...rest}) {
-        //if auth is true then show Route else redirect to login
-        return (
-            <>
-                {(auth) ?
-                    <Route path={path} {...rest}>
-                        <Component/>
-                    </Route> : <Redirect to={{
-                        pathname: "/auth/login",
-                        state: {from: location}
-                    }}/>
-                }
-            </>
-        )
-    }
+    // function PrivateRoute({auth, Component, path, location, restricted, ...rest}) {
+    //     //if auth is true then show Route else redirect to login
+    //     return (
+    //         <>
+    //             {/*{(auth) ?*/}
+    //             {/*    <Route path={path} {...rest}>*/}
+    //             {/*        <Component />*/}
+    //             {/*    </Route> : <Redirect to={{*/}
+    //             {/*        pathname: "/auth", //exclude userprofile page from not logged in*/}
+    //             {/*        // state: {from: location}*/}
+    //             {/*    }}/>*/}
+    //             {/*}*/}
+    //         </>
+    //     )
+    // }
 
 }
 export default App;

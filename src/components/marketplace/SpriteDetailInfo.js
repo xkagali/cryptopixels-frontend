@@ -7,13 +7,15 @@ import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 
-function SpriteDetailInfo({item}) {
+function SpriteDetailInfo({item, user, setUser}) {
+
     const {id} = useParams()
+
     let img
-    let currentUserIdTest = '60d20221a33274172cf44235'
+    let currentUserIdTest = "60d20221a33274172cf44235"
     let currentUserPoints = 10000
-    console.log(currentUserIdTest)
-    console.log(item.currentOwner?._id)
+    // console.log(user._id)
+    // console.log(item.currentOwner?._id)
 
     const [newListedPrice, setNewListedPrice] = useState(0)
 
@@ -61,7 +63,7 @@ function SpriteDetailInfo({item}) {
                 await axios.put(`/item/buy/${id}`, {
                     transactedPrice:parseInt(item.priceListed),
                     itemId:item._id,
-                    buyer:currentUserIdTest,
+                    buyer:user._id,
                     seller:item.currentOwner._id,
                     dateOfTransaction: new Date(),
                 })
@@ -122,10 +124,10 @@ function SpriteDetailInfo({item}) {
                     </div>
                     <div className="spriteOwner">
                         Current Owner:
-                        <OwnerCard item={item}/>
+                        {/*<OwnerCard item={item}/>*/}
                     </div>
                     <div className="spriteStats">
-                        <SpriteStatus item={item}/>
+                        <SpriteStatus item={item} user={user}/>
                     </div>
                 </Col>
                 <Col className="col-12 col-xs-10 col-md-4 col-xl-5 spriteDetails">
@@ -145,7 +147,7 @@ function SpriteDetailInfo({item}) {
                         <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
                     }
 
-                    {!currentUserIdTest===item.currentOwner?._id ?
+                    {!(user._id===item.currentOwner?._id) ?
                         <>{item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}</>
                     :
                         <>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
 import {Container, Row, Nav, Navbar, Button} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
 import {useHistory, useLocation} from "react-router-dom";
@@ -30,12 +29,10 @@ console.log(user)
                     <Navbar.Brand href=""><img src={logo}/> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav"  className={"justify-content-end align-items-center"}>
-                        {/*<Nav>*/}
-                        {/*    <Nav.Link href="#username">Username</Nav.Link> | <Nav.Link href="#points">Points</Nav.Link> | <Nav.Link href="#logout">Logout</Nav.Link>*/}
-                        {/*</Nav>*/}
                         { user ? (
                             <Nav className = "text-white d-inline-flex">
-                                <div className= "mr-2 bg-secondary">{user.username}</div>
+                                <div className= "mr-2 bg-secondary">Username: {user.displayName}</div>
+                                <div className= "mr-2 bg-secondary">CP: {user.points}</div>
                                 <Button variant="outline-secondary" onClick={logout} >Logout</Button>
                             </Nav>
                         ) : (

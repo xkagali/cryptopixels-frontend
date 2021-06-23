@@ -65,7 +65,7 @@ function Register({auth, setAuth, user}) {
                         <Row>
                             {/*<FormControl className="col-6 mx-auto" type="text" placeholder="First Name" name="firstName" onChange={handleChange} ></FormControl>*/}
                             {/*<FormControl className="col-6 mx-auto" type="text" placeholder="Last Name" name="lastName" onChange={handleChange} ></FormControl>*/}
-                            <FormControl className="col-6 mx-auto" type="text" placeholder="Username" name="displayName" onChange={handleChange} ></FormControl>
+                                <FormControl className="col-6 mx-auto" type="text" placeholder="Username" name="displayName" onChange={handleChange} ></FormControl>
                         </Row>
                     )}
                     {/*<FormControl type="email" placeholder="Display Name" name="displayName" onChange={handleChange} />*/}
