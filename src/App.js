@@ -13,8 +13,6 @@ import AdminPage from "./components/general/Admin";
 function App() {
     const [auth, setAuth] = useState({})
     const [user, setUser] = useState({})
-
-    console.log(user)
     useEffect(() => {
         async function setUserStatus() {
             try {
@@ -25,7 +23,6 @@ function App() {
                 })
                 setAuth(true)
                 setUser(data.user)
-                console.log(data.user._id)
             } catch (e) {
                 setAuth(false)
                 setUser(null)

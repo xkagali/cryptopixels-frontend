@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {Container, Row, Nav, Navbar, Button} from "react-bootstrap";
+import React from 'react';
+import {Container, Row, Nav, Navbar, Button, NavDropdown, CardImg} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
-import {useHistory, useLocation} from "react-router-dom";
-import decode from "jwt-decode";
+import {NavLink, useHistory} from "react-router-dom";
 
-function Navigation({setAuth, auth, user, setUser}) {
-    // const [user, setUser] = useState("");
-    // const dispatch = useDispatch()
+function Navigation({setAuth, user, setUser}) {
     const history = useHistory()
-    const location = useLocation()
-    console.log(localStorage.getItem('token'))
-
-    console.log(user)
 
     const logout = (e) => {
         e.preventDefault()
@@ -21,22 +14,21 @@ function Navigation({setAuth, auth, user, setUser}) {
         setUser(null) //set user to null) once logout
     }
 
-console.log(user)
     return (
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
                 <Container className="px-0">
                     <Navbar.Brand href=""><img src={logo}/> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav"  className={"justify-content-end align-items-center"}>
+                    <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end align-items-center">
+                        <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
                         { user ? (
-                            <Nav className = "text-white d-inline-flex">
-                                <div className= "mr-2 bg-secondary">Username: {user.displayName}</div>
-                                <div className= "mr-2 bg-secondary">CP: {user.points}</div>
-                                <Button variant="outline-secondary" onClick={logout} >Logout</Button>
-                            </Nav>
+                            <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text' style={{'color':'#C7C7C7'}}>
+                                <NavDropdown.Item to='/profile' style={{'color':'black'}}>Profile</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
+                            </NavDropdown>
                         ) : (
-                            <Button href="/auth" variant="outline-primary">Sign Up/ Sign In</Button>
+                            <Button href="/auth" variant="outline-primary" className='spriteDetails'>Sign Up/ Sign In</Button>
                         )}
                     </Navbar.Collapse>
                 </Container>
