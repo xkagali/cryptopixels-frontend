@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Container, Row, Nav, Navbar, Button} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
 import {useHistory, useLocation} from "react-router-dom";
-import decode from "jwt-decode";
 
-function Navigation({setAuth, auth, user, setUser}) {
-    // const [user, setUser] = useState("");
-    // const dispatch = useDispatch()
+function Navigation({setAuth, user, setUser}) {
+
     const history = useHistory()
     const location = useLocation()
     console.log(localStorage.getItem('token'))
