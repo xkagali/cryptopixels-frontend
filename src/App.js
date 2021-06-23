@@ -6,6 +6,9 @@ import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
 import AuthForm from "./components/auth/AuthForm"
 import axios from "axios";
+import OwnerProfile from "./components/owner/OwnerProfile";
+import AdminPage from "./components/general/Admin";
+
 
 function App() {
     const [auth, setAuth] = useState({})
@@ -48,6 +51,9 @@ function App() {
                     </Route>
                     <Route path="/pixel/:id" exact>
                         <SpriteDetail  setUser={setUser} user={user} />
+                    </Route>
+                    <Route path="/admin" exact>
+                        <AdminPage/>
                     </Route>
                 </Switch>
             </Container>
