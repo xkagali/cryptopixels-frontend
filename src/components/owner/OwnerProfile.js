@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Card, CardImg, Col, Row, Tab, Table, Tabs} from "react-bootstrap";
-import avatar from "../../lib/img/test/a07020509060000.png";
 import spriteIcon from "../../lib/img/test/a08120004050003.png";
-import {NavLink, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import axios from "axios";
 import OwnerCard from "./OwnerCard";
-import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 import SalesHistory from "../general/SalesHistory";
 import SpriteCard from "../marketplace/SpriteCard";
 
@@ -13,9 +11,9 @@ function OwnerProfile() {
     let {id} = useParams()
     const [userDetails,setUserDetails] = useState([])
     const [userSprites,setUserSprites] = useState([])
+    const [updateSprites,setUpdateSprites] = useState([])
     const [userTransactions, setUserTransactions] = useState([])
     const [userListed, setUserListed] = useState([])
-    let img
 
     useEffect(()=>{
         async function getUserDetails(){
@@ -32,14 +30,133 @@ function OwnerProfile() {
         if(userSprites.length){
             createBox()
         }
-
-        userSprites.forEach(sprite=>{
-            img = convertPngToBtoa(sprite.itemName)
-        })
-
+        setSpritesOnGrid()
     },[userSprites])
 
+    function setSpritesOnGrid(){
+
+        let spriteObj = {}
+        let spriteArr = []
+        let counter = 1
+        let spriteGridCtnWidth = document.querySelector(".spriteGrid").offsetWidth
+        let gridCellsPerRow = Math.floor(spriteGridCtnWidth/55)
+
+        let totalFit = Math.floor(gridCellsPerRow/2)
+        console.log("total fit " + totalFit)
+
+        // 21 cols
+        // counter = 0
+        //
+        // each sprite takes 2 cols, so if there's 7 sprites, it takes up 14, left with 7 cols
+        //
+        // 21/2 = 10.5 (round down to 10) - means 1 row can fit 10
+
+        if(userSprites.length <= totalFit){
+            // if total sprites does not exceed this, set col: (counter+1)*2
+            userSprites.forEach((sprite,index)=>{
+                spriteObj = {
+                    ...sprite,
+                    col: counter*2,
+                    row: 0
+                }
+                counter += 1
+                spriteArr.push(spriteObj)
+            })
+            setUpdateSprites(spriteArr)
+        }else if(userSprites.length > totalFit){
+            console.log("total sprites " + userSprites.length)
+            // if total sprites exceed this amount
+            // eg: total fit row is 5 and total sprites is 15
+            let row = 3;
+            let rowcounter = totalFit
+            let spritecounter = 0
+            userSprites.forEach(sprite=> {
+                // if spritecounter is the same as row counter, add 2 to rows
+                if(spritecounter === rowcounter){
+                    counter = 1
+                    row += 2;
+
+                    spriteObj = {
+                        ...sprite,
+                        col: counter*2,
+                        row: row
+                    }
+                    rowcounter += totalFit
+                }else{
+                    spriteObj = {
+                        ...sprite,
+                        col: counter*2,
+                        row: row
+                    }
+                }
+                spritecounter += 1
+                counter += 1
+                spriteArr.push(spriteObj)
+            })
+
+            setUpdateSprites(spriteArr)
+        }
+
+        console.log(spriteArr)
+        window.addEventListener('resize',function(e){
+            spriteGridCtnWidth = document.querySelector(".spriteGrid").offsetWidth
+            gridCellsPerRow = Math.floor(spriteGridCtnWidth/55)
+            totalFit = Math.floor(gridCellsPerRow/2)
+            spriteArr = []
+            spriteObj = {}
+            counter = 1
+
+            if(userSprites.length <= totalFit){
+                // if total sprites does not exceed this, set col: (counter+1)*2
+                userSprites.forEach((sprite,index)=>{
+                    spriteObj = {
+                        ...sprite,
+                        col: counter*2,
+                        row: 0
+                    }
+                    counter += 1
+                    spriteArr.push(spriteObj)
+                })
+                setUpdateSprites(spriteArr)
+            }else if(userSprites.length > totalFit){
+                console.log("total sprites " + userSprites.length)
+                // if total sprites exceed this amount
+                // eg: total fit row is 5 and total sprites is 15
+                let row = 3;
+                let rowcounter = totalFit
+                let spritecounter = 0
+                userSprites.forEach(sprite=> {
+                    // if spritecounter is the same as row counter, add 2 to rows
+                    if(spritecounter === rowcounter){
+                        counter = 1
+                        row += 2;
+
+                        spriteObj = {
+                            ...sprite,
+                            col: counter*2,
+                            row: row
+                        }
+                        rowcounter += totalFit
+                    }else{
+                        spriteObj = {
+                            ...sprite,
+                            col: counter*2,
+                            row: row
+                        }
+                    }
+                    spritecounter += 1
+                    counter += 1
+                    spriteArr.push(spriteObj)
+                })
+
+                setUpdateSprites(spriteArr)
+            }
+        })
+    }
+
     function createBox(){
+
+        //create box grid
         let counter = 1;
         let spritesNumber = userSprites.length;
         let rows = 4;
@@ -96,7 +213,6 @@ function OwnerProfile() {
             let gridCtnWidth = document.querySelector(".spriteBox").offsetWidth
             cellsPerRow = Math.floor(gridCtnWidth/55)
             let totalRows = getComputedStyle(gridCtn).getPropertyValue("grid-template-rows").split(" ").length
-            // console.log(totalRows)
 
             gridCtn.innerHTML="";
 
@@ -141,7 +257,7 @@ function OwnerProfile() {
         <>
             <Row>
                 <Col className="col-12">
-                    <OwnerCard item={userDetails} />
+                    {/*<OwnerCard item={userDetails} />*/}
                 </Col>
             </Row>
             <Row>
@@ -152,62 +268,15 @@ function OwnerProfile() {
                                 <div className="spriteDetailsImage">
                                     <div className="spriteBox"></div>
                                     <div className="spriteGrid">
-                                        <div className="spriteDetailsCtn d-flex">
-                                            <div className="spriteCtn">
-                                                <CardImg src={spriteIcon} />
+
+                                        {updateSprites.map((sprite,index)=>(
+                                            <div className="spriteDetailsCtn d-flex" key={sprite._id} style={{gridColumnStart: sprite.col, gridRowStart: sprite.row}}>
+                                                <div className="spriteCtn">
+                                                    <CardImg src={sprite.itemImage} />
+                                                </div>
                                             </div>
-                                        </div>
+                                        ))}
                                         {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '4'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '6'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '8'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '10'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '12'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '14'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '16'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '18'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridColumnStart: '20'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5'}}>*/}
-                                        {/*    <div className="spriteCtn">*/}
-                                        {/*        <CardImg src={spriteIcon} />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-                                        {/*<div className="spriteDetailsCtn d-flex" style={{gridRowStart: '5', gridColumnStart: '4'}}>*/}
                                         {/*    <div className="spriteCtn">*/}
                                         {/*        <CardImg src={spriteIcon} />*/}
                                         {/*    </div>*/}
@@ -219,7 +288,7 @@ function OwnerProfile() {
                         <Tab eventKey="listedPixels" title="Listed Pixels" tabClassName="listedPixelsTab">
                             <Row>
                                 {userListed.map(sprite=>(
-                                    <SpriteCard item={sprite} />
+                                    <SpriteCard item={sprite} key={sprite._id} />
                                 ))}
                             </Row>
                         </Tab>

@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Col, Row, Table} from "react-bootstrap";
 
 function SalesHistory({itemHistory, userProfile, userTransactions}) {
