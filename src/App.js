@@ -6,8 +6,8 @@ import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
 import AuthForm from "./components/auth/AuthForm"
 import axios from "axios";
-import OwnerProfile from "./components/owner/OwnerProfile";
 import AdminPage from "./components/general/Admin";
+import Home from "./components/general/Home";
 
 
 function App() {
@@ -60,8 +60,10 @@ function App() {
             <Container>
                 <Navigation setAuth={setAuth} setUser={setUser} user={user}/>
                 <Switch>
-    {/*//TODO*/}
-                    {/*<PrivateRouter auth={auth} path="/user/profile" Component={UserProfile} exact />*/}
+                    {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
                     <PrivateRouter admin={admin} path="/Admin" Component={AdminPage} exact />
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
@@ -113,7 +115,7 @@ function PrivateRouter({admin, Component, path, location, ...rest}) {
                 </Route>
                 :
                 <Redirect to={{
-                    pathname: "/market",
+                    pathname: "/",
                     state: {from: location}
                 }}/>
             }
