@@ -23,6 +23,7 @@ function OwnerProfile({user}) {
             setUserSprites(data.userDetails.items)
             setUserTransactions(data.salesHistory)
             setUserListed(data.userListed)
+            console.log()
         }
         getUserDetails()
     },[])
