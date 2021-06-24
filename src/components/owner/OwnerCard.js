@@ -1,7 +1,13 @@
-import React from 'react';
-import {CardImg} from "react-bootstrap";
+import React, {useEffect} from 'react';
+import {CardImg, NavLink} from "react-bootstrap";
+import {Link, useParams} from "react-router-dom"
 
 function OwnerCard({item}) {
+    let { id } = useParams()
+
+    console.log(item.currentOwner._id)
+    // let profileLink = `/profile/${item.currentOwner._id}`
+    // console.log(profileLink)
     return (
         <>
             {item.currentOwner?
@@ -27,5 +33,4 @@ function OwnerCard({item}) {
 
     );
 }
-
 export default OwnerCard;
