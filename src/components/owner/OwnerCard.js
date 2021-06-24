@@ -13,8 +13,15 @@ function OwnerCard({item}) {
                         {item.currentOwner.displayName}
                     </div>
                 </div>
-            :
-             'Loading'
+                :
+                <div className="ownerCard d-flex">
+                    <div className="spriteCtn">
+                        <CardImg src={item.displayImage?.itemImage} />
+                    </div>
+                    <div className="ownerName">
+                        {item.displayName}
+                    </div>
+                </div>
             }
         </>
 
