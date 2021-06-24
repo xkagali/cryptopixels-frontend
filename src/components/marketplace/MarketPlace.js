@@ -77,7 +77,7 @@ function MarketPlace() {
                 <Col className={"col-12"}>
                     <Form>
                         <Form.Group controlId="exampleForm" className="d-flex justify-content-end align-items-center">
-                            <Form.Label className="mb-0 mr-3">Sort:</Form.Label>
+                            <Form.Label className="mb-0 mr-3 text-right">Sort:</Form.Label>
                             <Form.Control as="select">
                                 <option onClick={clickSort}>Alphabetical</option>
                                 <option onClick={clickSort}>Price High to Low</option>

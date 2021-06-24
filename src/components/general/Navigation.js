@@ -33,6 +33,9 @@ function Navigation({setAuth, user, setUser}) {
                                         <CardImg src={user.displayImage?.itemImage} />
                                     </div>
                                 </div>
+                                <Navbar.Text>
+                                    {user.points}CP
+                                </Navbar.Text>
                             </>
                         ) : (
                             <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>
