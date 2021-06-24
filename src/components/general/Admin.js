@@ -40,7 +40,7 @@ const AdminPage = () => {
     async function saveItem(e){
         e.preventDefault()
         try{
-            await axios.put(`/item/create`, {
+            await axios.put(`/api/item/create`, {
                 itemName:itemName,
                 itemDescription:itemDescription,
                 itemImage:url,

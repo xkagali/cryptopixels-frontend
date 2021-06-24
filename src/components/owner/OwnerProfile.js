@@ -18,7 +18,7 @@ function OwnerProfile({user}) {
 
     useEffect(()=>{
         async function getUserDetails(){
-            let {data} = await axios.get(`/profile/${id}`)
+            let {data} = await axios.get(`/api/profile/${id}`)
             setUserDetails(data.userDetails)
             setUserSprites(data.userDetails.items)
             setUserTransactions(data.salesHistory)
@@ -86,4 +86,5 @@ function OwnerProfile({user}) {
         </>
     );
 }
+
 export default OwnerProfile;

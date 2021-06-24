@@ -11,7 +11,7 @@ function MarketPlace() {
 
     useEffect(()=>{
         async function getItemList(){
-            let {data} = await axios.get("/marketplace/")
+            let {data} = await axios.get("/api/marketplace/")
             setItemList(data.items)
         }
         getItemList()
