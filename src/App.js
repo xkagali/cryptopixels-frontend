@@ -9,6 +9,7 @@ import axios from "axios";
 import AdminPage from "./components/general/Admin";
 import Home from "./components/general/Home";
 import OwnerProfile from "./components/owner/OwnerProfile";
+import Achievements from "./components/achievements/Achievements";
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
                         <Home/>
                     </Route>
                     <PrivateRouter admin={admin} path="/Admin" Component={AdminPage} exact />
+
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
                     </Route>
@@ -80,6 +82,9 @@ function App() {
                     </Route>
                     <Route path="/admin" exact>
                         <AdminPage/>
+                    </Route>
+                    <Route path="/achievement/:id" exact>
+                        <Achievements user={user}/>
                     </Route>
                     {/*<PrivateRouter isAdmin={isAdmin} path="/admin" Component={AdminPage} exact/>*/}
                 </Switch>
