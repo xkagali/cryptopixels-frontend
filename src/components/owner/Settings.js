@@ -12,7 +12,7 @@ function Settings({userSprites, id, userDetails}) {
 
     async function onSubmit(e){
         try{
-            let result = await axios.post(`/profile/${id}`,newDetails)
+            let result = await axios.post(`/api/profile/${id}`,newDetails)
             console.log(result)
         }catch(e){
 

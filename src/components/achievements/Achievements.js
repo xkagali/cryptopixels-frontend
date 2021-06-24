@@ -11,7 +11,7 @@ function Achievements({user}){
 
     useEffect(()=>{
         async function getAchievements(){
-            let {data} = await axios.get(`/achievement/${id}`)
+            let {data} = await axios.get(`/api/achievement/${id}`)
             setAchievementList(data.achievements)
         }
         getAchievements()
@@ -27,7 +27,7 @@ function Achievements({user}){
             if (check){
                 alert(`Achievement already completed!`)
             } else {
-                await axios.put(`/achievement/${id}`,{achievement:achievement,user:user._id})
+                await axios.put(`/api/achievement/${id}`,{achievement:achievement,user:user._id})
                 await alert(`Task complete! you have been awarded ${achievement.pointsAwarded} points!`)
             }
 

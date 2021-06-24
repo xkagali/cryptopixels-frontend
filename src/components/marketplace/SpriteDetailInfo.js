@@ -23,7 +23,7 @@ function SpriteDetailInfo({item, user, setUser}) {
             if(newListedPrice===item.priceListed || !num || newListedPrice < 1){
                 alert('Invalid List Price!')
             } else {
-                await axios.put(`/item/changeListPrice/${id}`, {priceListed: newListedPrice})
+                await axios.put(`/api/item/changeListPrice/${id}`, {priceListed: newListedPrice})
                 alert('Item Successfully listed!')
             }
             window.location.reload()
@@ -35,7 +35,7 @@ function SpriteDetailInfo({item, user, setUser}) {
     async function submitUnlist(e){
         e.preventDefault()
         try{
-            await axios.put(`/item/unlist/${id}`)
+            await axios.put(`/api/item/unlist/${id}`)
             alert('Item Successfully Unlisted!')
             window.location.reload()
         }catch(e){
@@ -49,7 +49,7 @@ function SpriteDetailInfo({item, user, setUser}) {
             if (item.priceListed > user.points){
                 alert('Not Enough Points!')
             } else {
-                await axios.put(`/item/buy/${id}`, {
+                await axios.put(`/api/item/buy/${id}`, {
                     transactedPrice:parseInt(item.priceListed),
                     itemId:item._id,
                     buyer:user._id,
