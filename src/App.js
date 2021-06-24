@@ -6,8 +6,8 @@ import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
 import AuthForm from "./components/auth/AuthForm"
 import axios from "axios";
-import OwnerProfile from "./components/owner/OwnerProfile";
 import AdminPage from "./components/general/Admin";
+import Home from "./components/general/Home";
 
 
 function App() {
@@ -31,8 +31,6 @@ function App() {
         }
         setUserStatus()
     },[auth])
-    // console.log(user)
-    // console.log(data)
 
     return (
         <BrowserRouter>
@@ -40,6 +38,9 @@ function App() {
                 <Navigation setAuth={setAuth} setUser={setUser} user={user} />
                 <Switch>
                     {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
                     </Route>

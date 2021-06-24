@@ -18,17 +18,17 @@ function Navigation({setAuth, user, setUser}) {
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
                 <Container className="px-0">
-                    <Navbar.Brand href=""><img src={logo}/> </Navbar.Brand>
+                    <NavLink to={'/'} ><img src={logo}/> </NavLink>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end align-items-center">
-                        <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
+                        <NavLink to={'/market'} className='navbar-text mr-4'>Marketplace</NavLink>
                         { user ? (
                             <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text' style={{'color':'#C7C7C7'}}>
                                 <NavDropdown.Item to='/profile' style={{'color':'black'}}>Profile</NavDropdown.Item>
                                 <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <Button href="/auth" variant="outline-primary" className='spriteDetails'>Sign Up/ Sign In</Button>
+                            <NavLink to={'/auth'} className='navbar-text'>SignUp/SignIn</NavLink>
                         )}
                     </Navbar.Collapse>
                 </Container>
