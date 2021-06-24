@@ -5,7 +5,7 @@ import {Link, useParams} from "react-router-dom"
 function OwnerCard({item}) {
     let { id } = useParams()
 
-    console.log(item.currentOwner._id)
+    // console.log(item.currentOwner._id)
     // let profileLink = `/profile/${item.currentOwner._id}`
     // console.log(profileLink)
     return (

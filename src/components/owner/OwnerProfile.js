@@ -15,7 +15,7 @@ function OwnerProfile({user}) {
     const [userTransactions, setUserTransactions] = useState([])
     const [userListed, setUserListed] = useState([])
     const [userIsOwner, setUserIsOwner] = useState(false)
-    console.log({id})
+
     useEffect(()=>{
         async function getUserDetails(){
             let {data} = await axios.get(`/profile/${id}`)
@@ -29,10 +29,8 @@ function OwnerProfile({user}) {
 
     let loggedInUser = userDetails._id
     let currentPageUser = user._id
+    let userMatch = (loggedInUser === currentPageUser)
 
-    let userDontMatch = (loggedInUser !== currentPageUser)
-
-    console.log(userIsOwner)
     return (
         <>
             <Row>
@@ -42,59 +40,49 @@ function OwnerProfile({user}) {
             </Row>
             <Row>
                 <Col className="col-12 d-flex flex-column mb-5">
-                    {/*<Tabs defaultActiveKey="currentPixels" id="tab" className="mb-3">*/}
-                    {/*    {(userDontMatch) ?*/}
-                    {/*        <>*/}
-                    {/*    <Tab eventKey="currentPixels" title="Current Pixels" tabClassName="currentPixelsTab">*/}
-                    {/*        <AllSprites userSprites={userSprites}/>*/}
-                    {/*    </Tab>*/}
-                    {/*    <Tab eventKey="listedPixels" title="Listed Pixels" tabClassName="listedPixelsTab">*/}
-                    {/*        <Row>*/}
-                    {/*            {userListed.map((sprite,index)=>(*/}
-                    {/*                <SpriteCard item={sprite} key={index} />*/}
-                    {/*            ))}*/}
-                    {/*        </Row>*/}
-                    {/*    </Tab>*/}
-                    {/*        </>*/}
-                    {/*        :*/}
-                    {/*        <>*/}
-                    {/*    <Tab eventKey="currentPixels" title="Current Pixels" tabClassName="currentPixelsTab">*/}
-                    {/*        <AllSprites userSprites={userSprites}/>*/}
-                    {/*    </Tab>*/}
-                    {/*    <Tab eventKey="listedPixels" title="Listed Pixels" tabClassName="listedPixelsTab">*/}
-                    {/*        <Row>*/}
-                    {/*            {userListed.map((sprite,index)=>(*/}
-                    {/*                <SpriteCard item={sprite} key={index} />*/}
-                    {/*            ))}*/}
-                    {/*        </Row>*/}
-                    {/*    </Tab>*/}
-                    {/*        </>*/}
-                    {/*    <Tab eventKey="soldPixels" title="Sold Pixels" tabClassName="soldPixelsTab">*/}
-                    {/*        <SalesHistory userTransactions={userTransactions} userProfile={true} />*/}
-                    {/*    </Tab>*/}
-                    {/*    <Tab eventKey="settings" title="Settings" tabClassName="userSettingsTab">*/}
-                    {/*        <Settings userSprites={userSprites} id={id} userDetails={userDetails} />*/}
-                    {/*    </Tab>*/}
-                    {/*        </>*/}
-                    {/*        }*/}
-                    {/*</Tabs>*/}
-                    {(userDontMatch) ?
-                        <>
-                        <Col>current pixel tab</Col>
-                        <Col>listed pixel tab</Col>
-                        </>
-                        :
-                        <>
-                        <Col>current pixel tab</Col>
-                        <Col>listed pixel tab</Col>
-                        <Col>sold pixel tab</Col>
-                        <Col>setting</Col>
-                        </>
-                        }
+                    <Tab.Container defaultActiveKey="currentPixels" id="tab" className="mb-3">
+                        <Row>
+                            <Col className="col-12 tabCtn">
+                                <Nav>
+                                    <Nav.Item className="currentPixelsTab tab-nav">
+                                        <Nav.Link eventKey="currentPixels">Current Pixels</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className="listedPixelsTab tab-nav">
+                                        <Nav.Link eventKey="listedPixels">Listed Pixels</Nav.Link>
+                                    </Nav.Item>
+                                    {(userMatch) && <Nav.Item className="soldPixelsTab tab-nav">
+                                        <Nav.Link eventKey="soldPixels">Sold Pixels</Nav.Link>
+                                    </Nav.Item>}
+                                    {(userMatch) && <Nav.Item className="userSettingsTab tab-nav">
+                                        <Nav.Link eventKey="settings">Settings</Nav.Link>
+                                    </Nav.Item>}
+                                </Nav>
+                            </Col>
+                            <Col className="col-12 my-5">
+                                <Tab.Content>
+                                    <Tab.Pane eventKey="currentPixels">
+                                        <AllSprites userSprites={userSprites}/>
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="listedPixels">
+                                        <Row>
+                                            {userListed.map((sprite,index)=>(
+                                                <SpriteCard item={sprite} key={index} />
+                                            ))}
+                                        </Row>
+                                    </Tab.Pane>
+                                    {(userMatch) &&<Tab.Pane eventKey="soldPixels">
+                                        <SalesHistory userTransactions={userTransactions} userProfile={true} />
+                                    </Tab.Pane>}
+                                    {(userMatch) &&<Tab.Pane eventKey="settings">
+                                        <Settings userSprites={userSprites} id={id} userDetails={userDetails} />
+                                    </Tab.Pane>}
+                                </Tab.Content>
+                            </Col>
+                        </Row>
+                    </Tab.Container>
                 </Col>
             </Row>
         </>
     );
 }
-
 export default OwnerProfile;

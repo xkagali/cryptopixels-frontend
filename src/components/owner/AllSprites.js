@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {CardImg} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 function AllSprites({userSprites}) {
     const [updateSprites,setUpdateSprites] = useState([])
@@ -229,9 +230,11 @@ function AllSprites({userSprites}) {
                 <div className="spriteGrid">
                     {updateSprites.map((sprite, index)=>(
                         <div className="spriteDetailsCtn d-flex" key={index} style={{gridColumnStart: sprite.col, gridRowStart: sprite.row}}>
-                            <div className="spriteCtn">
-                                <CardImg src={sprite.itemImage} />
-                            </div>
+                            <NavLink to={`/pixel/${sprite._id}`}>
+                                <div className="spriteCtn">
+                                    <CardImg src={sprite.itemImage} />
+                                </div>
+                            </NavLink>
                         </div>
                     ))}
                 </div>

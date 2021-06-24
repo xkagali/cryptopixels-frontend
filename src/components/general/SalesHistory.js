@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Col, Row, Table} from "react-bootstrap";
+import SalesTransaction from "./SalesTransaction";
 
 function SalesHistory({itemHistory, userProfile, userTransactions}) {
 
@@ -20,13 +21,7 @@ function SalesHistory({itemHistory, userProfile, userTransactions}) {
                     </thead>
                     <tbody>
                     {userTransactions.map(item => (
-                        <tr style={{color: 'white'}} key={item._id}>
-                            <td data-label="Name">{item.itemId.itemName}</td>
-                            <td data-label="Pixel ID">{item.itemId._id}</td>
-                            <td data-label="Sold Date">{item.dateOfTransaction}</td>
-                            <td data-label="Sold Price">{item.transactedPrice}CP</td>
-                            <td data-label="Buyer">{item.buyer.displayName}</td>
-                        </tr>
+                        <SalesTransaction item={item} />
                     ))}
                     </tbody>
                 </Table>
@@ -47,12 +42,7 @@ function SalesHistory({itemHistory, userProfile, userTransactions}) {
                             </thead>
                             <tbody>
                             {itemHistory.map(item => (
-                                <tr style={{color: 'white'}} key={item._id}>
-                                    <td data-label="Last Sold Date">{item.dateOfTransaction}</td>
-                                    <td data-label="Last Sold Price">{item.transactedPrice}CP</td>
-                                    <td data-label="Buyer">{item.buyer.displayName}</td>
-                                    <td data-label="Seller">{item.seller.displayName}</td>
-                                </tr>
+                                <SalesTransaction item={item} itemHistory={true} />
                             ))}
                             </tbody>
                         </Table>

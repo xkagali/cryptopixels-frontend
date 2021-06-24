@@ -15,7 +15,6 @@ function Home(){
     for (let i =0; i<loopNo;i++){
         loopNoList.push((i+1).toString())
     }
-    console.log(loopNoList)
     return (
         <Container className='d-flex align-items-center justify-content-center body'>
             <div className='w-100' style={{maxWidth:'800px'}}>
