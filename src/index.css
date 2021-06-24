@@ -650,6 +650,33 @@ button, .btn {
   cursor: url("lib/img/pointer.png"), auto;
 }
 
+.dropdown-menu {
+  left: unset;
+  right: 0;
+  background-color: #000000;
+  padding: 0;
+}
+
+.dropdown .nav-link {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item {
+  padding: 15px;
+  border-bottom: 1px solid #3E3E3E;
+}
+
+.dropdown-item:last-child{
+  border-bottom: none;
+}
+
+a.dropdown-item:hover, a.dropdown-item:focus {
+  background-color: #1d1d1d;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .table {
@@ -739,6 +766,9 @@ button, .btn {
     height: 25px;
     width: 25px;
   }
+  .ownerCard {
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 575px){
@@ -754,8 +784,31 @@ button, .btn {
     border-bottom: 1px solid #3E3E3E;
   }
 
-  .navbar-text:last-child{
+  .dropdown-menu {
+    width:100%;
+    background-color: #1d1d1d;
+  }
+
+  .dropdown-item {
+    padding-left:40px;
+    width:100%;
+    background-color: #1d1d1d;
+    opacity: 0.5;
+    border-bottom: 1px solid #3E3E3E;
+  }
+
+  .dropdown-toggle::after {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+  }
+
+  .navbar-text:last-child, .dropdown-item:last-child{
     border-bottom: none;
+  }
+
+  .dropdown-item:hover {
+    opacity: 1;
   }
 }
 
