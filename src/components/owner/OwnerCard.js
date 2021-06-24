@@ -1,30 +1,30 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {CardImg} from "react-bootstrap";
-import {convertPngToBtoa} from "../../lib/convertPngToBtoa";
 
 function OwnerCard({item}) {
-    // console.log(item)
-    let img
-    let owner
-    // if (item.currentOwner) {
-    //     img = convertPngToBtoa(item.currentOwner.displayImage)
-    //     owner = item.currentOwner.displayName
-    // }
-    //
-    // if (item.displayImage || item.displayName) {
-    //     img = convertPngToBtoa(item.displayImage)
-    //     owner = item.displayName
-    // }
-
     return (
-        <div className="ownerCard d-flex">
-            <div className="spriteCtn">
-                {/*<CardImg src={img}/>*/}
-            </div>
-            <div className="ownerName">
-                {/*{owner}*/}
-            </div>
-        </div>
+        <>
+            {item.currentOwner?
+                <div className="ownerCard d-flex">
+                    <div className="spriteCtn">
+                        <CardImg src={item.currentOwner.displayImage?.itemImage} />
+                    </div>
+                    <div className="ownerName">
+                        {item.currentOwner.displayName}
+                    </div>
+                </div>
+                :
+                <div className="ownerCard d-flex">
+                    <div className="spriteCtn">
+                        <CardImg src={item.displayImage?.itemImage} />
+                    </div>
+                    <div className="ownerName">
+                        {item.displayName}
+                    </div>
+                </div>
+            }
+        </>
+
     );
 }
 
