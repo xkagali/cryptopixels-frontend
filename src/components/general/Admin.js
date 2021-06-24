@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios";
+import {Row, Col} from "react-bootstrap";
 
 const AdminPage = () => {
     const [image, setImage ] = useState("");
@@ -59,21 +60,53 @@ const AdminPage = () => {
 
 
     return (
-        <div>
-            <h2>Pixels saved will automatically be uploaded on the Marketplace</h2>
-            <div>
-                <input type="text" name="itemName" placeholder="Item Name" onChange={changeItemName}/>
-                <input type="text" name="itemDescription" placeholder="Item Description" onChange={changeItemDescription}/>
-                <input type="text" name="itemPrice" placeholder="Item Price" onChange={changeItemPrice}/>
-                <input type="file" onChange= {(e)=> setImage(e.target.files[0])}></input>
-                <button onClick={uploadImage}>Upload Image</button>
-                <button onClick={saveItem}>Save Pixel</button>
-            </div>
-            <div>
-                <h1>Uploaded image will be displayed here</h1>
-                <img src={url}/>
-            </div>
-        </div>
+        <Row className="justify-content-center">
+            <Col className="col-12 text-center"> <h5>Pixels saved will automatically be uploaded on the Marketplace</h5></Col>
+            <Col className="col-12 col-md-8">
+                <Row>
+                    <Col className="col-12 adminForm">
+                        <Row className="align-items-center">
+                            <Col className="col-12 col-md-3 text-right">
+                                <label>Pixel Name</label></Col>
+                            <Col className="col-12 col-md-9">
+                            <input type="text" name="itemName" placeholder="Pixel Name" onChange={changeItemName}/>
+                            </Col>
+                        </Row>
+                        <Row className="align-items-center">
+                            <Col className="col-12 col-md-3 text-right">
+                                <label>Pixel Description</label></Col>
+                            <Col className="col-12 col-md-9">
+                            <input type="text" name="itemDescription" placeholder="Pixel Description" onChange={changeItemDescription}/>
+                            </Col>
+                        </Row>
+                        <Row className="align-items-center">
+                            <Col className="col-12 col-md-3 text-right">
+                                <label>Pixel Price</label></Col>
+                            <Col className="col-12 col-md-9">
+                            <input type="text" name="itemPrice" placeholder="Pixel Price" onChange={changeItemPrice}/>
+                            </Col>
+                        </Row>
+                        <Row className="align-items-center">
+                            <Col className="col-12 col-md-3 text-right">
+                                <label>Pixel Image</label></Col>
+                            <Col className="col-12 col-md-9">
+                            <input type="file" onChange= {(e)=> setImage(e.target.files[0])}></input>
+                            <button onClick={uploadImage}  className="btn-primary">Upload Image</button>
+                            </Col>
+                            <Col className="col-12 my-5 text-center">
+                                <h6>Uploaded image will be displayed here</h6>
+                                <img src={url}/>
+                            </Col>
+                        </Row>
+                        <Row className="text-center">
+                            <Col className="col-12">
+                            <button onClick={saveItem} className="btn-primary">Save Pixel</button>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     )
 }
 
