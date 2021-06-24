@@ -126,36 +126,43 @@ function SpriteDetailInfo({item, user, setUser}) {
 
                     {user?
                         <>
-                            {item.inMarketplace?
+                            {item.inMarketplace && !(user?._id===item.currentOwner?._id) ?
                                 <>
-                                    <div className="dateListed">{item.dateListed}</div>
+                                    <div className="dateListed">Date Listed: {item.dateListed}</div>
                                     <div className="spritePrice">{item.priceListed}CP</div>
-                                </>
-                                :
-                                <></>
-                            }
-
-                            {!(user?._id===item.currentOwner?._id) ?
-                                <>
-                                    <div className="spriteDetails">{user.points}CP Available</div>
-                                    {item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}
+                                    <Button variant="primary"onClick={submitBuy}>Buy</Button>
+                                    <div className="spriteDetails pt-2">{user.points}CP Available</div>
                                 </>
                                 :
                                 <>
-                                    <div><input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/></div>
-                                    {/*<Button variant="secondary" >Sold</Button>*/}
-                                    <Button variant="primary" onClick={submitListedPrice}>List</Button>
-                                    {item.inMarketplace? <Button variant="tertiary" onClick={submitUnlist}>Unlist</Button>:<></>}
+                                    {!item.inMarketplace && (user?._id===item.currentOwner?._id) ?
+                                        <>
+                                            <div><input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/></div>
+                                            <Button variant="primary" onClick={submitListedPrice}>List</Button>
+                                        </>
+                                        :
+                                        <>
+                                            {item.inMarketplace && (user?._id===item.currentOwner?._id) ?
+                                                <>
+                                                    <div className="dateListed">Date Listed: {item.dateListed}</div>
+                                                    <div className="spritePrice">{item.priceListed}CP</div>
+                                                    <div><input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/></div>
+                                                    <Button variant="primary" onClick={submitListedPrice}>List</Button>
+                                                    <Button variant="tertiary" onClick={submitUnlist}>Unlist</Button>
+                                                </>
+                                                :
+                                                <></>
+                                            }
+                                        </>
+                                    }
                                 </>
                             }
                         </>
-                        :
-                        <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
-                    }
-                    {!(user?._id===item.currentOwner?._id) ?
-                        <>{item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}</>
                     :
-                        <div className="spritePrice">{item.priceListed}CP</div>
+                        <>
+                            <div className="dateListed">Date Listed: {item.dateListed}</div>
+                            <div className="spritePrice">{item.priceListed}CP</div>
+                        </>
                     }
                 </Col>
             </Row>
@@ -165,6 +172,5 @@ function SpriteDetailInfo({item, user, setUser}) {
 export default SpriteDetailInfo;
 
 
-//if currentuser = owner show list or unlist
-//if currentuser != owner show buy
+
 
