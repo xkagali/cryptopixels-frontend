@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Card, Form, Row, Col, FormControl, Button} from "react-bootstrap";
+import {Form, Row, Col, FormControl, Button} from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from 'react-router-dom'
 
@@ -54,34 +54,66 @@ function Register({auth, setAuth, user}) {
     }
 
     return (
-        <Container>
-            <Card className="row h1 text-center my-auto">
-                <Card className="h5">{isSignup ? "Register" : "Log In"}</Card>
-                <Form onSubmit={isSignup ? registerSubmit : loginSubmit}>
-                    { isSignup && (
-                        <Row>
-                            {/*<FormControl className="col-6 mx-auto" type="text" placeholder="First Name" name="firstName" onChange={handleChange} ></FormControl>*/}
-                            {/*<FormControl className="col-6 mx-auto" type="text" placeholder="Last Name" name="lastName" onChange={handleChange} ></FormControl>*/}
-                                <FormControl className="col-6 mx-auto" type="text" placeholder="Username" name="displayName" onChange={handleChange} ></FormControl>
-                        </Row>
-                    )}
-                    {/*<FormControl type="email" placeholder="Display Name" name="displayName" onChange={handleChange} />*/}
-                    <FormControl type="email" placeholder="Email Address" name="email" onChange={handleChange} />
-                    <FormControl placeholder="Password" name="password" onChange={handleChange} type={showPassword ? 'text' : 'password' } onClick={handleShowPassword}  />
-                    {isSignup && <Form.Control className='confirmPassword' placeholder='Confirm Password' name="confirmPassword" onChange={handleChange} type="password" /> }
-                    <Button type='submit' variant="primary" >
-                        {isSignup ? "Sign Up" : "Sign In"}
-                    </Button>
-                    <Row>
-                        <Col>
-                            <Button onClick={switchMode} >
-                                {isSignup ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-                            </Button>
-                        </Col>
-                    </Row>
-                </Form>
-            </Card>
-        </Container>
+        <Row className="justify-content-center">
+            <Col className="col-12 text-center"><h3>{isSignup ? "Register" : "Log In"}</h3></Col>
+            <Col className="col-12 col-md-8">
+                <Row>
+                    <Col className="col-12 signupForm">
+                        <Form onSubmit={isSignup ? registerSubmit : loginSubmit}>
+                            { isSignup && (
+                                <Row className="align-items-center">
+                                    <Col className="col-12 col-md-3 text-right">
+                                        <label>Username</label></Col>
+                                    <Col className="col-12 col-md-9">
+                                        {/*<FormControl className="col-6 mx-auto" type="text" placeholder="First Name" name="firstName" onChange={handleChange} ></FormControl>*/}
+                                        {/*<FormControl className="col-6 mx-auto" type="text" placeholder="Last Name" name="lastName" onChange={handleChange} ></FormControl>*/}
+                                        <input type="text" placeholder="Username" name="displayName" onChange={handleChange} />
+                                    </Col>
+                                </Row>
+                            )}
+                            {/*<FormControl type="email" placeholder="Display Name" name="displayName" onChange={handleChange} />*/}
+                            <Row className="align-items-center">
+                                <Col className="col-12 col-md-3 text-right">
+                                    <label>Email</label></Col>
+                                <Col className="col-12 col-md-9">
+                                    <input type="email" placeholder="Email Address" name="email" onChange={handleChange} />
+                                </Col>
+                            </Row>
+                            <Row className="align-items-center">
+                                <Col className="col-12 col-md-3 text-right">
+                                    <label>Password</label></Col>
+                                <Col className="col-12 col-md-9">
+                                    <input placeholder="Password" name="password" onChange={handleChange} type={showPassword ? 'text' : 'password' } onClick={handleShowPassword}  />
+                                </Col>
+                            </Row>
+                            {isSignup &&
+                            <Row className="align-items-center">
+                                <Col className="col-12 col-md-3 text-right">
+                                    <label>Confirm Password</label></Col>
+                                <Col className="col-12 col-md-9">
+                            <input className='confirmPassword' placeholder='Confirm Password' name="confirmPassword" onChange={handleChange} type="password" />
+                                </Col>
+                            </Row>
+                            }
+                            <Row className="mt-2 mb-4 text-center">
+                                <Col className="col-12">
+                                    <Button type='submit' variant="primary" >
+                                        {isSignup ? "Sign Up" : "Sign In"}
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row className="text-center">
+                                <Col className="col-12">
+                                    <a onClick={switchMode} >
+                                        {isSignup ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+                                    </a>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
 
     );
 }

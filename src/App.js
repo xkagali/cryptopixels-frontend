@@ -72,7 +72,10 @@ function App() {
                     <Route path="/pixel/:id" exact>
                         <SpriteDetail setUser={setUser} user={user}/>
                     </Route>
-                    <Route path="/auth/admin" exact>
+                    <Route path="/profile/:id" exact>
+                        <OwnerProfile />
+                    </Route>
+                    <Route path="/admin" exact>
                         <AdminPage/>
                     </Route>
                     {/*<PrivateRouter isAdmin={isAdmin} path="/admin" Component={AdminPage} exact/>*/}
