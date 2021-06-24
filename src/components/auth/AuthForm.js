@@ -63,11 +63,11 @@ function Register({auth, setAuth, user}) {
                             { isSignup && (
                                 <Row className="align-items-center">
                                     <Col className="col-12 col-md-3 text-right">
-                                        <label>Username</label></Col>
+                                        <label>Display Name</label></Col>
                                     <Col className="col-12 col-md-9">
                                         {/*<FormControl className="col-6 mx-auto" type="text" placeholder="First Name" name="firstName" onChange={handleChange} ></FormControl>*/}
                                         {/*<FormControl className="col-6 mx-auto" type="text" placeholder="Last Name" name="lastName" onChange={handleChange} ></FormControl>*/}
-                                        <input type="text" placeholder="Username" name="displayName" onChange={handleChange} />
+                                        <input type="text" placeholder="Display Name" name="displayName" onChange={handleChange} required />
                                     </Col>
                                 </Row>
                             )}
@@ -76,14 +76,14 @@ function Register({auth, setAuth, user}) {
                                 <Col className="col-12 col-md-3 text-right">
                                     <label>Email</label></Col>
                                 <Col className="col-12 col-md-9">
-                                    <input type="email" placeholder="Email Address" name="email" onChange={handleChange} />
+                                    <input type="email" placeholder="Email Address" name="email" onChange={handleChange} required />
                                 </Col>
                             </Row>
                             <Row className="align-items-center">
                                 <Col className="col-12 col-md-3 text-right">
                                     <label>Password</label></Col>
                                 <Col className="col-12 col-md-9">
-                                    <input placeholder="Password" name="password" onChange={handleChange} type={showPassword ? 'text' : 'password' } onClick={handleShowPassword}  />
+                                    <input placeholder="Password" name="password" onChange={handleChange} type={showPassword ? 'text' : 'password' } onClick={handleShowPassword} required  />
                                 </Col>
                             </Row>
                             {isSignup &&
@@ -91,7 +91,7 @@ function Register({auth, setAuth, user}) {
                                 <Col className="col-12 col-md-3 text-right">
                                     <label>Confirm Password</label></Col>
                                 <Col className="col-12 col-md-9">
-                            <input className='confirmPassword' placeholder='Confirm Password' name="confirmPassword" onChange={handleChange} type="password" />
+                            <input className='confirmPassword' placeholder='Confirm Password' name="confirmPassword" onChange={handleChange} type="password" required />
                                 </Col>
                             </Row>
                             }

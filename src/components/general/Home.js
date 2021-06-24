@@ -25,7 +25,7 @@ function Home(){
                 <div className="text-center headers"></div>
                 <div className="ownerCard d-flex">
                     {loopNoList.map((value, index) => (
-                        <>
+                        <div className="d-flex" key={index}>
                             <div className="spriteCtn">
                                 <CardImg src={img1} />
                             </div>
@@ -41,7 +41,7 @@ function Home(){
                             <div className="spriteCtn">
                                 <CardImg src={img5} />
                             </div>
-                        </>
+                        </div>
                     ))}
                 </div>
             </div>

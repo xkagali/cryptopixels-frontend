@@ -4,6 +4,10 @@ html, select {
   cursor: url('lib/img/cursor.png'), auto;
 }
 
+a, a:hover {
+  text-decoration: none;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -90,6 +94,10 @@ input[type="text"], input[type="email"], input[type="password"] {
   -webkit-box-shadow: 1px 1px 0 3px rgba(94,109,97,1) inset;
   -moz-box-shadow: 1px 1px 0 3px rgba(94,109,97,1) inset;
   outline: none;
+}
+
+.searchBar {
+  max-width: 100% !important;
 }
 
 input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder {
