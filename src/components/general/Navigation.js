@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Nav, Navbar, Button, NavDropdown, CardImg} from "react-bootstrap";
+import {Container, Row, Nav, Navbar, Button, NavDropdown, CardImg, Col} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
 import {NavLink, useHistory} from "react-router-dom";
 
@@ -14,6 +14,7 @@ function Navigation({setAuth, user, setUser}) {
         setUser(null) //set user to null) once logout
     }
 
+
     return (
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
@@ -24,7 +25,10 @@ function Navigation({setAuth, user, setUser}) {
                         <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
                         { user ? (
                             <>
-                                <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text'>
+                                <Navbar.Text>
+                                    {user.points}CP
+                                </Navbar.Text>
+                                <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text '>
                                     <NavDropdown.Item href={`/profile/${user._id}`}>Profile</NavDropdown.Item>
                                     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
@@ -33,9 +37,6 @@ function Navigation({setAuth, user, setUser}) {
                                         <CardImg src={user.displayImage?.itemImage} />
                                     </div>
                                 </div>
-                                <Navbar.Text>
-                                    {user.points}CP
-                                </Navbar.Text>
                             </>
                         ) : (
                             <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>

@@ -118,8 +118,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                         </div>
                     </div>
                     <div className="spriteOwner">
-                        Current Owner:
-                        <OwnerCard item={item}/>
+                        <OwnerCard item={item} user={user}/>
                     </div>
                     <div className="spriteStats">
                         <SpriteStatus item={item} user={user}/>

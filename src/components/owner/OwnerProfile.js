@@ -7,6 +7,7 @@ import SalesHistory from "../general/SalesHistory";
 import SpriteCard from "../marketplace/SpriteCard";
 import AllSprites from "./AllSprites";
 import Settings from "./Settings";
+
 function OwnerProfile({user}) {
     let {id} = useParams()
     const [userDetails,setUserDetails] = useState([])
@@ -14,6 +15,7 @@ function OwnerProfile({user}) {
     const [userTransactions, setUserTransactions] = useState([])
     const [userListed, setUserListed] = useState([])
     const [userIsOwner, setUserIsOwner] = useState(false)
+
     useEffect(()=>{
         async function getUserDetails(){
             let {data} = await axios.get(`/profile/${id}`)
@@ -21,18 +23,20 @@ function OwnerProfile({user}) {
             setUserSprites(data.userDetails.items)
             setUserTransactions(data.salesHistory)
             setUserListed(data.userListed)
+            console.log()
         }
         getUserDetails()
     },[])
+
     let loggedInUser = userDetails._id
     let currentPageUser = user._id
     let userMatch = (loggedInUser === currentPageUser)
-    console.log(userIsOwner)
+
     return (
         <>
             <Row>
                 <Col className="col-12">
-                    <OwnerCard item={userDetails} />
+                    <OwnerCard item={userDetails} user={user}/>
                 </Col>
             </Row>
             <Row>
