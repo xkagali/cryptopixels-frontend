@@ -31,7 +31,7 @@ function Register({auth, setAuth, user}) {
                 setAuth(true)
                 history.push('/')
             } catch (error) {
-                console.log(error)
+                console.log(`HEREEREREER ${error}`)
                 alert(error)
             }
         }
@@ -52,7 +52,6 @@ function Register({auth, setAuth, user}) {
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
-
 
     return (
         <Row className="justify-content-center">

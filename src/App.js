@@ -13,6 +13,24 @@ import AdminPage from "./components/general/Admin";
 function App() {
     const [auth, setAuth] = useState({})
     const [user, setUser] = useState({})
+    const [admin, setAdmin] = useState({})
+
+    useEffect(() =>{
+        async function setAdminStatus () {
+            try{
+                let {data} = await axios.get("/auth/user", {
+                    headers: {
+                        authorization: `Bearer ${localStorage.token}`
+                    }
+                })
+                setAdmin(data.user.isAdmin)
+                }catch(e){
+                setAdmin(false)
+                }
+        }
+        setAdminStatus()
+    },[]);
+
     useEffect(() => {
         async function setUserStatus() {
             try {
@@ -30,16 +48,21 @@ function App() {
             }
         }
         setUserStatus()
-    },[auth])
-    // console.log(user)
-    // console.log(data)
+    }, [auth])
+
+
+
+    // console.log(user.isAdmin)
+    // console.log("token")
 
     return (
         <BrowserRouter>
             <Container>
-                <Navigation setAuth={setAuth} setUser={setUser} user={user} />
+                <Navigation setAuth={setAuth} setUser={setUser} user={user}/>
                 <Switch>
-                    {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
+    {/*//TODO*/}
+                    {/*<PrivateRouter auth={auth} path="/user/profile" Component={UserProfile} exact />*/}
+                    <PrivateRouter admin={admin} path="/Admin" Component={AdminPage} exact />
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
                     </Route>
@@ -47,7 +70,7 @@ function App() {
                         <MarketPlace/>
                     </Route>
                     <Route path="/pixel/:id" exact>
-                        <SpriteDetail  setUser={setUser} user={user} />
+                        <SpriteDetail setUser={setUser} user={user}/>
                     </Route>
                     <Route path="/profile/:id" exact>
                         <OwnerProfile />
@@ -55,40 +78,64 @@ function App() {
                     <Route path="/admin" exact>
                         <AdminPage/>
                     </Route>
+                    {/*<PrivateRouter isAdmin={isAdmin} path="/admin" Component={AdminPage} exact/>*/}
                 </Switch>
             </Container>
         </BrowserRouter>
     );
-
-    // function PrivateRouter({auth, user, Component, path, ...rest}){
-    //     return(
-    //         <>
-    //             { (auth) ?
-    //                 <Route path={path} >
-    //                     <Component {...rest} />
-    //                 </Route> : <Redirect to= {{
-    //                     // pathname = "/auth", //exclude userprofile page from not logged in
-    //                     // state: {from: location}
-    //                 }}/>
-    //             }
-    //         </>
-    //     )};
-
-    // function PrivateRoute({auth, Component, path, location, restricted, ...rest}) {
-    //     //if auth is true then show Route else redirect to login
-    //     return (
-    //         <>
-    //             {/*{(auth) ?*/}
-    //             {/*    <Route path={path} {...rest}>*/}
-    //             {/*        <Component />*/}
-    //             {/*    </Route> : <Redirect to={{*/}
-    //             {/*        pathname: "/auth", //exclude userprofile page from not logged in*/}
-    //             {/*        // state: {from: location}*/}
-    //             {/*    }}/>*/}
-    //             {/*}*/}
-    //         </>
-    //     )
-    // }
-
 }
+
+// function PrivateRouter({auth, Component, path, location, ...rest}) {
+//     //if auth is true then show Route else redirect to login
+//     return (
+//         <>
+//             {(auth) ? //if auth, allow to view userprofile, else redirect market
+//                 <Route path={path} {...rest}>
+//                     <Component/>
+//                 </Route>
+//                 :
+//                 <Redirect to={{
+//                     pathname: "/market",
+//                     state: {from: location}
+//                 }}/>
+//             }
+//         </>
+//     )
+// }
+
+function PrivateRouter({admin, Component, path, location, ...rest}) {
+    //if auth is true then show Route else redirect to login
+    return (
+        <>
+            {(admin) ? //if auth, allow to view userprofile, else redirect market
+                <Route path={path} {...rest}>
+                    <Component/>
+                </Route>
+                :
+                <Redirect to={{
+                    pathname: "/market",
+                    state: {from: location}
+                }}/>
+            }
+        </>
+    )
+}
+
+//     function PrivateRouter({auth, Component, path, location, ...rest}) {
+//         //if auth is true then show Route else redirect to login
+//         return (
+//             <>
+//                 {(auth) ? //if auth, allow to view userprofile, else redirect market
+//                     <Route path={path} {...rest}>
+//                         <Component/>
+//                     </Route>
+//                     :
+//                     <Redirect to={{
+//                         pathname: "/market",
+//                         state: {from: location}
+//                     }}/>
+//                 }
+//             </>
+//         )
+// }
 export default App;

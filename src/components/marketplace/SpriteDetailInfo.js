@@ -149,6 +149,11 @@ function SpriteDetailInfo({item, user, setUser}) {
                                 </>
                             }
                         </>
+                        :
+                        <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
+                    }
+                    {!(user?._id===item.currentOwner?._id) ?
+                        <>{item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}</>
                     :
                         <div className="spritePrice">{item.priceListed}CP</div>
                     }
