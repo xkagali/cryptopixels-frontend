@@ -531,22 +531,25 @@ button, .btn {
   display: block;
 }
 
-.nav-tabs {
+.tabCtn {
   z-index: 1;
   border-bottom: 1px solid #3E3E3E;
 }
 
-.nav-tabs .nav-link, .userSettingsTab {
-  font-size: 18px;
-  line-height: 27px;
-  color: #ffffff;
-  opacity: 0.5;
+.tab-nav {
   padding: 21px 15px;
   display: flex;
   align-items: center;
+  font-size: 18px;
+  line-height: 27px;
 }
 
-.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+.tab-nav .nav-link {
+  opacity: 0.5;
+  color: #ffffff;
+}
+
+.tab-nav .nav-link.active {
   background-color: transparent;
   border: none;
   font-weight: bold;
@@ -724,14 +727,7 @@ button, .btn {
 }
 
 @media screen and (max-width: 715px){
-  .nav-tabs .nav-link, .userSettingsTab{
-    width:25%;
-    justify-content: center;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  .nav-tabs .nav-link{
+  .tab-nav{
     width:25%;
     justify-content: center;
     padding: 10px;
@@ -742,29 +738,6 @@ button, .btn {
     margin-right: 10px;
     height: 25px;
     width: 25px;
-  }
-}
-
-@media screen and (max-width: 715px){
-  .nav-tabs .nav-link, .userSettingsTab{
-    width:25%;
-    justify-content: center;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  .nav-tabs .nav-link{
-    width:25%;
-    justify-content: center;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  .currentPixelsTab:before, .listedPixelsTab:before, .soldPixelsTab:before, .achievementsTab:before, .userSettingsTab:before {
-    margin-right: 10px;
-    height: 25px;
-    width: 25px;
-    background-size: contain;
   }
 }
 
@@ -787,7 +760,7 @@ button, .btn {
 }
 
 @media screen and (max-width: 550px){
-  .nav-tabs .nav-link, .userSettingsTab{
+  .tab-nav{
     width:50%;
     justify-content: center;
     padding: 10px;

@@ -25,7 +25,7 @@ function Navigation({setAuth, user, setUser}) {
                         { user ? (
                             <>
                                 <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text' style={{'color':'#C7C7C7'}}>
-                                    <NavDropdown.Item to='/profile' style={{'color':'black'}}>Profile</NavDropdown.Item>
+                                    <NavDropdown.Item href={`/profile/${user._id}`} style={{'color':'black'}}>Profile</NavDropdown.Item>
                                     <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                                 <div className="spriteDetailsCtn d-flex">
