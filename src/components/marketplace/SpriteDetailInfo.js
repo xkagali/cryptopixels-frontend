@@ -122,7 +122,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                 </Col>
                 <Col className="col-12 col-xs-10 col-md-4 col-xl-5 spriteDetails">
                     <h2>{item.itemName}</h2>
-                    <div className="spriteID">{item._id}</div>
+                    <div className="spriteID">#{item._id}</div>
 
                     {user?
                         <>
