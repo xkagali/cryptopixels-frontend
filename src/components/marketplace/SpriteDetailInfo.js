@@ -122,7 +122,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                 </Col>
                 <Col className="col-12 col-xs-10 col-md-4 col-xl-5 spriteDetails">
                     <h2>{item.itemName}</h2>
-                    <div className="spriteID">{item._id}</div>
+                    <div className="spriteID">#{item._id}</div>
 
                     {user?
                         <>
@@ -149,6 +149,11 @@ function SpriteDetailInfo({item, user, setUser}) {
                                 </>
                             }
                         </>
+                        :
+                        <input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/>
+                    }
+                    {!(user?._id===item.currentOwner?._id) ?
+                        <>{item.inMarketplace? <Button variant="primary"onClick={submitBuy}>Buy</Button>:<></>}</>
                     :
                         <div className="spritePrice">{item.priceListed}CP</div>
                     }

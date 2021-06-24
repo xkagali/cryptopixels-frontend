@@ -4,6 +4,10 @@ html, select {
   cursor: url('lib/img/cursor.png'), auto;
 }
 
+a, a:hover {
+  text-decoration: none;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -54,8 +58,15 @@ a {
 }
 
 .navbar-text{
-  color: #C7C7C7;
+  color: #C7C7C7 !important;
   font-family: 'Share Tech Mono', monospace;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.navbar-text:hover{
+  color:#ffffff !important;
+  text-decoration: none;
 }
 
 input {
@@ -74,6 +85,7 @@ label {
 
 input[type="text"], input[type="email"], input[type="password"] {
   width: 100%;
+  max-width: 400px;
   padding: 15px;
   border: 0;
   background-color:#7E9181;
@@ -84,7 +96,11 @@ input[type="text"], input[type="email"], input[type="password"] {
   outline: none;
 }
 
-input[type="text"]::placeholder {
+.searchBar {
+  max-width: 100% !important;
+}
+
+input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder {
   color:#ffffff;
 }
 
@@ -625,8 +641,10 @@ button, .btn {
   margin-right: 15px;
 }
 
-.spritePreview {
-
+.navbar-dark .navbar-toggler {
+  border: none;
+  color: #ffffff;
+  cursor: url("lib/img/pointer.png"), auto;
 }
 
 
@@ -695,6 +713,14 @@ button, .btn {
     max-height: unset;
     min-height: unset;
   }
+
+  .signupForm input {
+    max-width: 100%;
+  }
+
+  .signupForm .text-right {
+    text-align: left !important;
+  }
 }
 
 @media screen and (max-width: 715px){
@@ -739,6 +765,24 @@ button, .btn {
     height: 25px;
     width: 25px;
     background-size: contain;
+  }
+}
+
+@media screen and (max-width: 575px){
+  .navbar-collapse{
+    padding-top: 20px;
+    margin: 0 -20px;
+  }
+  .navbar-text{
+    display: block;
+    padding: 20px;
+    margin: 0;
+    background-color: #1d1d1d;
+    border-bottom: 1px solid #3E3E3E;
+  }
+
+  .navbar-text:last-child{
+    border-bottom: none;
   }
 }
 

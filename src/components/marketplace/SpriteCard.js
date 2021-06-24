@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 function SpriteCard({item}){
     return (
         <Col className="col-6 col-sm-3 col-md-3 col-lg-2">
-g            <NavLink to={`/pixel/${item._id}`}>
+            <NavLink to={`/pixel/${item._id}`}>
                     <Card>
                         <div className="cardCtn d-flex">
                             <div className="spriteCtn">

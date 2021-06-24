@@ -12,7 +12,7 @@ function SpriteDetail({user, setUser}) {
 
     useEffect(()=>{
         async function getItem(){
-            console.log(id)
+            // console.log(id)
             let {data} = await axios.get(`/item/${id}`)
             setItem(data.item)
             setItemHistory(data.itemHistory)
