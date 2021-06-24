@@ -714,11 +714,11 @@ button, .btn {
     min-height: unset;
   }
 
-  .signupForm input {
+  .signupForm input, .adminForm input {
     max-width: 100%;
   }
 
-  .signupForm .text-right {
+  .signupForm .text-right, .adminForm .text-right {
     text-align: left !important;
   }
 }
