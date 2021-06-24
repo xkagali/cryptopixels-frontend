@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Titillium+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-html {
+html, select {
   cursor: url('lib/img/cursor.png'), auto;
 }
 
@@ -69,6 +69,7 @@ label {
   margin: 10px 0;
   width:100%;
   opacity: 0.5;
+  cursor: url('lib/img/cursor.png'), auto;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
