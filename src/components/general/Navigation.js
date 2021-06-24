@@ -21,14 +21,14 @@ function Navigation({setAuth, user, setUser}) {
                     <Navbar.Brand href="/"><img src={logo}/> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end align-items-center">
-                        <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
+                        <NavLink to={'/market'} className='navbar-text mr-4'>Marketplace</NavLink>
                         { user ? (
                             <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text' style={{'color':'#C7C7C7'}}>
                                 <NavDropdown.Item to='/profile' style={{'color':'black'}}>Profile</NavDropdown.Item>
                                 <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <Button href="/auth" variant="outline-primary" className='spriteDetails'>Sign Up/ Sign In</Button>
+                            <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>
                         )}
                     </Navbar.Collapse>
                 </Container>

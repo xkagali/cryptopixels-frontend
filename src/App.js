@@ -6,8 +6,9 @@ import MarketPlace from "./components/marketplace/MarketPlace";
 import SpriteDetail from "./components/marketplace/SpriteDetail";
 import AuthForm from "./components/auth/AuthForm"
 import axios from "axios";
-import OwnerProfile from "./components/owner/OwnerProfile";
 import AdminPage from "./components/general/Admin";
+import Home from "./components/general/Home";
+import OwnerProfile from "./components/owner/OwnerProfile";
 
 
 function App() {
@@ -60,8 +61,10 @@ function App() {
             <Container>
                 <Navigation setAuth={setAuth} setUser={setUser} user={user}/>
                 <Switch>
-    {/*//TODO*/}
-                    {/*<PrivateRouter auth={auth} path="/user/profile" Component={UserProfile} exact />*/}
+                    {/*<PrivateRoute user={user} setAuth={setAuth} setUser={setUser} path="/auth" exact />*/}
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
                     <PrivateRouter admin={admin} path="/Admin" Component={AdminPage} exact />
                     <Route path="/auth" exact>
                         <AuthForm auth={auth} setAuth={setAuth}/>
@@ -72,7 +75,10 @@ function App() {
                     <Route path="/pixel/:id" exact>
                         <SpriteDetail setUser={setUser} user={user}/>
                     </Route>
-                    <Route path="/auth/admin" exact>
+                    <Route path="/profile/:id" exact>
+                        <OwnerProfile />
+                    </Route>
+                    <Route path="/admin" exact>
                         <AdminPage/>
                     </Route>
                     {/*<PrivateRouter isAdmin={isAdmin} path="/admin" Component={AdminPage} exact/>*/}
@@ -110,7 +116,7 @@ function PrivateRouter({admin, Component, path, location, ...rest}) {
                 </Route>
                 :
                 <Redirect to={{
-                    pathname: "/market",
+                    pathname: "/",
                     state: {from: location}
                 }}/>
             }

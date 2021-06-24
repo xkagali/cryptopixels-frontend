@@ -70,7 +70,7 @@ function MarketPlace() {
         <>
             <Row className="mb-3">
                 <Col className={"col-12"}>
-                    <input type="text" name="search" placeholder="Sprite Name" onChange={searchChange} value={input}/>
+                    <input type="text" name="search" className={"searchBar"} placeholder="Sprite Name" onChange={searchChange} value={input}/>
                 </Col>
             </Row>
             <Row className="mb-3">
