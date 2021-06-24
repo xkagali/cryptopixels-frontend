@@ -76,7 +76,7 @@ function App() {
                         <SpriteDetail setUser={setUser} user={user}/>
                     </Route>
                     <Route path="/profile/:id" exact>
-                        <OwnerProfile />
+                        <OwnerProfile setUser={setUser} user={user}/>
                     </Route>
                     <Route path="/admin" exact>
                         <AdminPage/>

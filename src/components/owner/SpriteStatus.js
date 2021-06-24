@@ -1,31 +1,43 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 function SpriteStatus({item, user}) {
-    // console.log(item)
-    // console.log(user)
-    // console.log(item.currentOwner?._id)
-    // console.log(user._id)
+    const [formatDate, setFormatDate] = useState("")
+    const [formatPurchaseDate, setformatPurchaseDate] = useState("")
+
+    useEffect(()=>{
+        const date = new Date(item.dateListed)
+        setFormatDate(date.toLocaleDateString('en-GB', {  year: 'numeric', month: 'short', day: 'numeric' }))
+
+        const purchaseDate = new Date(item.datePurchased)
+        setformatPurchaseDate(purchaseDate.toLocaleDateString('en-GB', {  year: 'numeric', month: 'short', day: 'numeric' }))
+    },[item])
     return (
         <>
-            <div className="spriteInfo d-flex">
-                <div className="boughtDate">
-                    Purchased On:<br className="showDesktop"/>{item.datePurchased}
+            {item.currentOwner?._id == user?._id ?
+            <>
+                {item.inMarketplace ?
+                <div className="spriteInfo d-flex">
+                    <div className="spriteStatus list">
+                        You listed this Pixel
+                    </div>
+                    <div className="boughtDate">
+                        Listed On:<br className="showDesktop"/>{formatDate}
+                    </div>
                 </div>
-                <div className="boughtDate">
-                    Listed On:<br className="showDesktop"/>{item.dateListed}
-                </div>
-            </div>
-            {user && <div className="spriteInfo d-flex">
-                {item.currentOwner?._id == user?._id ?
+                :
+                <div className="spriteInfo d-flex">
                     <div className="spriteStatus own">
                         You own this Pixel
                     </div>
-                    :
-                    <div className="spriteStatus dontown">
-                        You do not own this Pixel
+                    <div className="boughtDate">
+                        Purchased On:<br className="showDesktop"/>{formatPurchaseDate}
                     </div>
+                </div>
                 }
-            </div>}
+            </>
+            :
+            <></>
+            }
         </>
     );
 }
