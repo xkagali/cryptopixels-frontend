@@ -25,7 +25,9 @@ function Navigation({setAuth, user, setUser}) {
                         <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
                         { user ? (
                             <>
-                                <Nav className="pl-3 ">CP: {user.points}</Nav>
+                                <Navbar.Text>
+                                    {user.points}CP
+                                </Navbar.Text>
                                 <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text '>
                                     <NavDropdown.Item href={`/profile/${user._id}`}>Profile</NavDropdown.Item>
                                     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
@@ -35,9 +37,6 @@ function Navigation({setAuth, user, setUser}) {
                                         <CardImg src={user.displayImage?.itemImage} />
                                     </div>
                                 </div>
-                                <Navbar.Text>
-                                    {user.points}CP
-                                </Navbar.Text>
                             </>
                         ) : (
                             <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>

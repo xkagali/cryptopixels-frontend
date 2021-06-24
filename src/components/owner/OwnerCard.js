@@ -1,29 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {CardImg, NavLink} from "react-bootstrap";
-import {Link, useParams} from "react-router-dom"
+import { CardImg } from "react-bootstrap";
+import {Link, useParams, NavLink} from "react-router-dom"
 import axios from "axios";
 
 function OwnerCard({item, user}) {
     let { currentOwner } = useParams()
 
-    // useEffect(()=>{
-    //     async function getUserDetails(){
-    //         // let {data} = await axios.get(`/profile/${id}`)
-    //         // setUserDetails(data.userDetails)
-    //         // setUserSprites(data.userDetails.items)
-    //         // setUserTransactions(data.salesHistory)
-    //         // setUserListed(data.userListed)
-    //         console.log()
-    //     }
-    //     getUserDetails()
-    // },[])
+
     console.log({ currentOwner })
-    // console.log(item.currentOwner._id)
-    // let profileLink = `/profile/${item.currentOwner._id}`
-    // console.log(profileLink)
     return (
         <>
             {item.currentOwner?
+                <NavLink to={`/profile/${item.currentOwner._id}`} >
                 <div className="ownerCard d-flex">
                     <div className="spriteCtn">
                         <CardImg src={item.currentOwner.displayImage?.itemImage} />
@@ -32,6 +20,8 @@ function OwnerCard({item, user}) {
                         {item.currentOwner.displayName}
                     </div>
                 </div>
+                </NavLink>
+
                 :
                 <div className="ownerCard d-flex">
                     <div className="spriteCtn">
