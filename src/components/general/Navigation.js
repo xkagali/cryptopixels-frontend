@@ -18,7 +18,7 @@ function Navigation({setAuth, user, setUser}) {
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
                 <Container className="px-0">
-                    <NavLink to={'/'} ><img src={logo}/> </NavLink>
+                    <Navbar.Brand href="/"><img src={logo}/> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end align-items-center">
                         <NavLink to={'/market'} className='navbar-text mr-4'>Marketplace</NavLink>
@@ -28,7 +28,7 @@ function Navigation({setAuth, user, setUser}) {
                                 <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <NavLink to={'/auth'} className='navbar-text'>SignUp/SignIn</NavLink>
+                            <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>
                         )}
                     </Navbar.Collapse>
                 </Container>
