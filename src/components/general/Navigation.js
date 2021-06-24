@@ -28,7 +28,7 @@ function Navigation({setAuth, user, setUser}) {
                                 <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         ) : (
-                            <Button href="/auth" variant="outline-primary" className='spriteDetails'>Sign Up/ Sign In</Button>
+                            <NavLink to={"/auth"} className='navbar-text'>Register / Login</NavLink>
                         )}
                     </Navbar.Collapse>
                 </Container>
