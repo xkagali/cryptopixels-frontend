@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardImg, Col} from "react-bootstrap";
-import {NavLink} from "react-router-dom"
+import {NavLink} from "react-router-dom";
 
 function SpriteCard({item}){
     return (

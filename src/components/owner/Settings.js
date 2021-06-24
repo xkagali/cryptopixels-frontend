@@ -5,8 +5,7 @@ import axios from "axios";
 function Settings({userSprites, id, userDetails}) {
     const [newDetails,setNewDetails] = useState({})
     const [previewIcon, setPreviewIcon] = useState("")
-    const [currentIcon, setCurrentIcon] = useState("")
-    console.log(userDetails)
+    
     function change(e) {
         setNewDetails(currState => ({...currState, ...{[e.target.name]: e.target.value}}))
     }

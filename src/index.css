@@ -53,6 +53,11 @@ a {
   padding-bottom: 0;
 }
 
+.navbar-text{
+  color: #C7C7C7;
+  font-family: 'Share Tech Mono', monospace;
+}
+
 input {
   font-family: 'Share Tech Mono', monospace;
   font-size: 18px;
@@ -147,6 +152,7 @@ input[type="text"]:focus {
   flex-grow: 1;
   font-family: 'Share Tech Mono', monospace;
 }
+
 
 .card .cpPrice {
   color: #FFFFFF;
@@ -446,6 +452,10 @@ button, .btn {
 
 .own {
   background: #4BA747;
+}
+
+.dontown {
+  background: #ff0000;
 }
 
 .spriteStatus.own:before, .spriteStatus.own:after {
