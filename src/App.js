@@ -8,6 +8,7 @@ import AuthForm from "./components/auth/AuthForm"
 import axios from "axios";
 import AdminPage from "./components/general/Admin";
 import Home from "./components/general/Home";
+import OwnerProfile from "./components/owner/OwnerProfile";
 
 
 function App() {
