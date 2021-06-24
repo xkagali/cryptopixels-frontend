@@ -697,6 +697,14 @@ button, .btn {
     max-height: unset;
     min-height: unset;
   }
+
+  .signupForm input {
+    max-width: 100%;
+  }
+
+  .signupForm .text-right {
+    text-align: left !important;
+  }
 }
 
 @media screen and (max-width: 715px){
