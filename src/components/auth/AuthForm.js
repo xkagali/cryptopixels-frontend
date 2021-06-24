@@ -6,15 +6,11 @@ import { useHistory } from 'react-router-dom'
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''} //for sign up field
 
 function Register({auth, setAuth, user}) {
-    //click to show password
-    const [showPassword, setShowPassword] = useState(false)
-    const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword)
 
     //toggle between registration and login
     const [isSignup, setIsSignup] = useState(true);
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup)
-        setShowPassword(false)
     }
 
     //handles input fields
@@ -83,7 +79,7 @@ function Register({auth, setAuth, user}) {
                                 <Col className="col-12 col-md-3 text-right">
                                     <label>Password</label></Col>
                                 <Col className="col-12 col-md-9">
-                                    <input placeholder="Password" name="password" onChange={handleChange} type={showPassword ? 'text' : 'password' } onClick={handleShowPassword} required  />
+                                    <input placeholder="Password" name="password" onChange={handleChange} type='password' required  />
                                 </Col>
                             </Row>
                             {isSignup &&

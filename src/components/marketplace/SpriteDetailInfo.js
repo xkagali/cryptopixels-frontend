@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, CardImg, Col, Row} from "react-bootstrap";
 import OwnerCard from "../owner/OwnerCard";
 import SpriteStatus from "../owner/SpriteStatus";
@@ -9,7 +9,12 @@ import {useParams} from "react-router-dom";
 function SpriteDetailInfo({item, user, setUser}) {
     const {id} = useParams()
     const [newListedPrice, setNewListedPrice] = useState(0)
+    const [formatDate, setFormatDate] = useState("")
 
+    useEffect(()=>{
+        const date = new Date(item.dateListed)
+        setFormatDate(date.toLocaleDateString('en-GB', {  year: 'numeric', month: 'short', day: 'numeric' }))
+    },[item])
 
     function setListedPrice(e){
         setNewListedPrice(e.target.value)
@@ -113,8 +118,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                         </div>
                     </div>
                     <div className="spriteOwner">
-                        Current Owner:
-                        <OwnerCard item={item}/>
+                        <OwnerCard item={item} user={user}/>
                     </div>
                     <div className="spriteStats">
                         <SpriteStatus item={item} user={user}/>
@@ -128,7 +132,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                         <>
                             {item.inMarketplace && !(user?._id===item.currentOwner?._id) ?
                                 <>
-                                    <div className="dateListed">Date Listed: {item.dateListed}</div>
+                                    <div className="dateListed">{formatDate}</div>
                                     <div className="spritePrice">{item.priceListed}CP</div>
                                     <Button variant="primary"onClick={submitBuy}>Buy</Button>
                                     <div className="spriteDetails pt-2">{user.points}CP Available</div>
@@ -144,7 +148,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                                         <>
                                             {item.inMarketplace && (user?._id===item.currentOwner?._id) ?
                                                 <>
-                                                    <div className="dateListed">Date Listed: {item.dateListed}</div>
+                                                    <div className="dateListed">{formatDate}</div>
                                                     <div className="spritePrice">{item.priceListed}CP</div>
                                                     <div><input type="text" name="search" placeholder="CP Price" onChange={setListedPrice}/></div>
                                                     <Button variant="primary" onClick={submitListedPrice}>List</Button>
@@ -160,7 +164,7 @@ function SpriteDetailInfo({item, user, setUser}) {
                         </>
                     :
                         <>
-                            <div className="dateListed">Date Listed: {item.dateListed}</div>
+                            <div className="dateListed">{formatDate}</div>
                             <div className="spritePrice">{item.priceListed}CP</div>
                         </>
                     }

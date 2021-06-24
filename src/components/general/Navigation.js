@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Nav, Navbar, Button, NavDropdown, CardImg} from "react-bootstrap";
+import {Container, Row, Nav, Navbar, Button, NavDropdown, CardImg, Col} from "react-bootstrap";
 import logo from "../../lib/img/Logo.png";
 import {NavLink, useHistory} from "react-router-dom";
 
@@ -14,6 +14,7 @@ function Navigation({setAuth, user, setUser}) {
         setUser(null) //set user to null) once logout
     }
 
+
     return (
         <Row>
             <Navbar collapseOnSelect variant={"dark"} expand={"sm"} className={"w-100"}>
@@ -21,12 +22,15 @@ function Navigation({setAuth, user, setUser}) {
                     <Navbar.Brand href="/"><img src={logo}/> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav"  className="justify-content-end align-items-center">
-                        <NavLink to={'/market'} className='navbar-text mr-4'>Marketplace</NavLink>
+                        <NavLink to={'/market'} className='navbar-text'>Marketplace</NavLink>
                         { user ? (
                             <>
-                                <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text' style={{'color':'#C7C7C7'}}>
-                                    <NavDropdown.Item to='/profile' style={{'color':'black'}}>Profile</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={logout} style={{'color':'black'}}>Logout</NavDropdown.Item>
+                                <Navbar.Text>
+                                    {user.points}CP
+                                </Navbar.Text>
+                                <NavDropdown title={user.displayName} id="basic-nav-dropdown" className='navbar-text '>
+                                    <NavDropdown.Item href={`/profile/${user._id}`}>Profile</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                                 <div className="spriteDetailsCtn d-flex">
                                     <div className="spriteCtn">
